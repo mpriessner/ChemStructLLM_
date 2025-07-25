@@ -1,0 +1,14 @@
+temp/
+log/
+data/
+jobs/
+experiments/
+
+compute_properties.py
+
+__pycache__
+*.pyc
+.idea
+.unison*
+
+*.sh
