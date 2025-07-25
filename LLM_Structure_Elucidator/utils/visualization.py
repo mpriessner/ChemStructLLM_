@@ -5,7 +5,7 @@ import io
 import base64
 import numpy as np
 import plotly.graph_objects as go
-from handlers.molecule_handler import MoleculeHandler
+from models.molecule import MoleculeHandler
 from rdkit import Chem
 from rdkit.Chem import Draw, AllChem
 from PIL import Image
