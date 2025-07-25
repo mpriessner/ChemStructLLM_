@@ -2,7 +2,7 @@
 
 python -m molbart.inference_score \
   data_path=data/uspto_sep.pickle \
-  model_path=saved_models/uspto_sep/span_aug/100_epochs/last.ckpt \
+  model_path=../models/chemformer/saved_models/uspto_sep/span_aug/100_epochs/last.ckpt \
   vocabulary_path=bart_vocab_downstream.json \
   datamodule=[molbart.data.seq2seq_data.UsptoSepDataModule] \
   task=forward_prediction \

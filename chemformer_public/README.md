@@ -41,12 +41,21 @@ For developers: Run the following to enable editable mode
     pip install -e .
 ```
 
+## Model Directory Structure
+
+**Note:** The trained models are now located in the parent directory at `../models/chemformer/` relative to this chemformer_public directory. This includes:
+- Pre-trained models: `../models/chemformer/pre-trained/`
+- Fine-tuned models: `../models/chemformer/fined-tuned/`
+- Saved models: `../models/chemformer/saved_models/`
+
+All example scripts and configuration files have been updated to reflect this new structure.
+
 ## User guide
 The following is an example of how to fine tune Chemformer using the pre-trained models and datasets available [here](https://az.box.com/s/7eci3nd9vy0xplqniitpk02rbg9q2zcq).
 
 1. Create a Chemformer conda environment, as above.
 1. Download the dataset of interest and store it locally (e.g. ../data/uspto_50.pickle).
-1. Download a pre-trained Chemformer model and store it locally (e.g ../models/pre-trained/combined.ckpt).
+1. Download a pre-trained Chemformer model and store it locally (e.g ../models/chemformer/pre-trained/combined.ckpt).
 1. Update the `fine_tune.sh` shell script in the example_scripts directory (or create your own) with the paths to your model and dataset, as well as the values of hyperparameters you wish to pass to the script.
 1. Run the `fine_tune.sh` script.
 

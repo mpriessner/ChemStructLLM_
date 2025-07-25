@@ -3,7 +3,7 @@
 python -m molbart.fine_tune \  
   datamodule=[molbart.data.seq2seq_data.Uspto50DataModule] \
   data_path=data/uspto_50.pickle \
-  model_path=models/bart/span_aug.ckpt \
+  model_path=../models/chemformer/bart/span_aug.ckpt \
   vocabulary_path=bart_vocab_downstream.json \
   task=backward_prediction \
   n_epochs=100 \

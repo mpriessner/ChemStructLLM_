@@ -6,7 +6,7 @@ n_beams: 5
 n_unique_beams: 5
 batch_size: 64
 data_path: /projects/cc/se_users/knlr326/1_NMR_project/1_NMR_data_AZ/46_Project_3_Data/2.0_USPTO_Data_Experiment/uspto_mixed_test_reactants.txt
-model_path: /projects/cc/se_users/knlr326/1_NMR_project/1_NMR_data_AZ/1_old_models/Chemformer/models/fined-tuned/uspto_mixed/last_v2.ckpt
+model_path: ../models/chemformer/fined-tuned/uspto_mixed/last_v2.ckpt
 vocabulary_path: /projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_identifier/chemformer_public/bart_vocab_downstream.json
 output_sampled_smiles: /projects/cc/se_users/knlr326/1_NMR_project/1_NMR_data_AZ/46_Project_3_Data/2.0_USPTO_Data_Experiment/uspto_mixed_test_reactants_predictions.csv
 datamodule:
