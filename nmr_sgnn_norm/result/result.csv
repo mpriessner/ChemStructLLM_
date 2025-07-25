@@ -1,0 +1,2 @@
+message_passing_mode,readout_mode,graph_representation,target,fold_seed,test_mae,test_rmse,time_per_mol
+proposed,proposed,sparsified,1H,1,0.18049304882721026,0.4266314096194385,0.015600977935523631

@@ -1,0 +1,1 @@
+/projects/cc/se_users/knlr326/1_NMR_project/1_NMR_data_AZ/52_project_3.3_data/sim_data/combined_sim_nmr_data_no_stereo_aug_added.csv

@@ -1,0 +1,39 @@
+SBATCH
+/usr/bin/which: no nvcc in (/projects/cc/se_users/knlr326/miniconda_SE/envs/LLM_312/bin:/projects/cc/se_users/knlr326/miniconda_SE/condabin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/knlr326/.local/bin:/home/knlr326/bin)
+
+ACTIVATE
+/projects/cc/se_users/knlr326/miniconda_SE/envs/NMR_Structure_Elucidator/bin/python
+nvidia-smi
+Thu Nov 28 08:20:23 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.183.06             Driver Version: 535.183.06   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  Tesla V100-SXM2-32GB           On  | 00000000:3B:00.0 Off |                    0 |
+| N/A   33C    P0              43W / 300W |      0MiB / 32768MiB |      0%   E. Process |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+python
+Using backend: pytorch
+0
+[1m[33m run_sgnn: DONE[0m
+[1m[33m run_1H_generation: DONE[0m
+[1m[33m run_13C_generation: DONE[0m
+[1m[33m run_COSY_generation: DONE[0m
+[1m[33m run_HSQC_generation: DONE[0m
+Copied 1H NMR predictions to /projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/_temp_folder/nmr_prediction_1H.csv
+Copied 13C NMR predictions to /projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/_temp_folder/nmr_prediction_13C.csv
+Copied COSY NMR predictions to /projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/_temp_folder/nmr_prediction_COSY.csv
+Copied HSQC NMR predictions to /projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/_temp_folder/nmr_prediction_HSQC.csv
+Finished simulating NMR data

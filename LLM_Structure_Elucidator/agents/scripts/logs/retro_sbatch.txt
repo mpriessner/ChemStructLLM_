@@ -1,0 +1,14 @@
+ACTIVATE
+/projects/cc/se_users/knlr326/miniconda_SE/envs/chemformer/bin/python
+INFO:__main__:Creating Chemformer configuration
+INFO:__main__:Configuration created: {'data_path': '/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/_temp_folder/retro_targets.txt', 'vocabulary_path': '/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/chemformer_public/bart_vocab_downstream.json', 'model_path': '/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/chemformer_public/models/fined-tuned/uspto_50/last_v2.ckpt', 'task': 'backward_prediction', 'output_sampled_smiles': '/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/_temp_folder/retro_predictions.csv', 'batch_size': 64, 'n_beams': 50, 'n_gpus': 1, 'train_mode': 'eval', 'model_type': 'bart', 'datamodule': ['SynthesisDataModule']}
+INFO:__main__:Initializing Chemformer model
+INFO:__main__:Running predictions
+train mode: eval
+Using a batch size of 64.
+Loaded datamodule: 'synthesis' with configuration '{'reverse': True, 'max_seq_len': 512, 'tokenizer': <molbart.utils.tokenizers.tokenizers.ChemformerTokenizer object at 0x7f7af9cd1310>, 'augment_prob': None, 'unified_model': False, 'dataset_path': '/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/_temp_folder/retro_targets.txt', 'batch_size': 64, 'train_token_batch_size': None, 'num_buckets': None, 'i_chunk': 0, 'n_chunks': 1}'
+Using 16 workers for data module.
+Vocabulary_size: 523
+No scorer configs found! Skipping...
+INFO:__main__:Predictions completed. Results saved to /projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/_temp_folder/retro_predictions.csv
+Sampling with beam size: 50

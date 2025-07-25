@@ -1,0 +1,14 @@
+seed: 2
+dataset_part: test
+n_beams: 5
+batch_size: 64
+data_path: /projects/cc/knlr326/1_NMR_project/1_NMR_data_AZ/1_old_models/Chemformer/data/seq-to-seq_datasets/uspto_50_test_100.txt
+model_path: /projects/cc/knlr326/1_NMR_project/1_NMR_data_AZ/1_old_models/Chemformer/models/fined-tuned/uspto_mixed/last_v2.ckpt
+vocabulary_path: /projects/cc/knlr326/1_NMR_project/2_Notebooks/MMT_identifier/chemformer_public/bart_vocab_downstream.json
+output_sampled_smiles: /projects/cc/knlr326/1_NMR_project/2_Notebooks/MMT_identifier/chemformer_public/experiment/predictions.csv
+datamodule:
+- SynthesisDataModule
+train_mode: eval
+model_type: bart
+task: forward_prediction
+n_gpus: 1

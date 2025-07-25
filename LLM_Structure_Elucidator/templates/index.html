@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Structure Elucidator</title>
+    
+    <!-- Core Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    
+    <!-- Visualization Dependencies -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://3dmol.org/build/3Dmol-min.js"></script>
+    <script src="https://3dmol.org/build/3Dmol.ui-min.js"></script>
+
+    <!-- Kekule.js Dependencies -->
+    <link rel="stylesheet" href="https://unpkg.com/kekule/dist/themes/default/kekule.css">
+    <script src="https://unpkg.com/kekule/dist/kekule.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script>
+        // Initialize Kekule when the page loads
+        if (typeof Kekule !== 'undefined') {
+            Kekule.initOnDomReady();
+        }
+    </script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="page-title">
+        <h1>LLM Structure Elucidator v1</h1>
+        <button id="test-functionality" class="test-button">
+            <i class="fas fa-vial"></i> Test
+        </button>
+    </div>
+    <div class="container">
+        <div class="chat-panel">
+            <div class="chat-header">
+                <select id="model-select">
+                    <option value="gemini-flash" selected>Gemini 1.5 Flash</option>
+                    <option value="gemini-pro">Gemini Pro</option>
+                    <option value="claude-3-5-haiku">Claude 3.5 Haiku</option>
+                    <option value="claude-3-5-sonnet">Claude 3.5 Sonnet</option>
+                    <option value="gpt-4o">GPT-4o</option>
+                    <option value="gpt-4o-mini">GPT-4o Mini</option>
+                </select>
+                <button id="clear-chat">Clear Chat</button>
+                <button id="run-elucidation" class="elucidation-button">
+                    <i class="fas fa-atom"></i> Run Structure Elucidation
+                </button>
+            </div>
+            <div id="chat-messages"></div>
+            <div class="input-container">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="micButton" class="mic-button">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+        <div class="resize-handle"></div>
+        <div class="visualization-panel">
+            <div class="tab-bar">
+                <button class="tab-button active" data-tab="nmr">NMR Analysis</button>
+                <button class="tab-button" data-tab="structure">Structure View</button>
+            </div>
+            <div class="tab-content active" data-tab="nmr">
+                <div class="visualization-grid">
+                    <!-- NMR Analysis Tab Content -->
+                    <div class="visualization-container" id="vis-container-1">
+                        <div class="visualization-header">
+                            <div class="tab-container">
+                                <button class="visualization-tab active">2D Molecule</button>
+                            </div>
+                            <button class="close-visualization" data-container="1">&times;</button>
+                        </div>
+                        <div class="visualization-content" id="vis-content-1">
+                            <div class="content-placeholder">
+                                <i class="fas fa-file-upload fa-2x mb-2"></i>
+                                <p>Ready for file input</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visualization-container" id="vis-container-2">
+                        <div class="visualization-header">
+                            <span>File Input</span>
+                            <button class="close-visualization" data-container="2">&times;</button>
+                        </div>
+                        <div class="visualization-content" id="vis-content-2">
+                            <div class="file-input-box">
+                                <i class="fas fa-file-upload fa-2x"></i>
+                                <p>Select a file to upload:</p>
+                                <ul class="file-types">
+                                    <li>CSV file with SMILES column</li>
+                                    <li>molecular_data.json file</li>
+                                </ul>
+                                <div class="button-group">
+                                    <input type="file" id="file-input-2" accept=".csv, .json" style="display: none;" onchange="handleFileSelect(event, 2)">
+                                    <button class="file-input-button" onclick="document.getElementById('file-input-2').click()">
+                                        Choose File
+                                    </button>
+                                    <button id="upload-button-2" class="file-input-button" disabled onclick="uploadSelectedFile(2)">
+                                        Upload File
+                                    </button>
+                                </div>
+                                <div id="upload-status-2" class="upload-status"></div>
+                                <div id="file-list-2" class="file-list"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visualization-container" id="vis-container-3">
+                        <div class="visualization-header">
+                            <div class="tab-container">
+                                <button class="visualization-tab active">3D Molecule</button>
+                            </div>
+                            <button class="close-visualization" data-container="3">&times;</button>
+                        </div>
+                        <div class="visualization-content" id="vis-content-3">
+                            <div id="container-01" class="mol-container"></div>
+                        </div>
+                    </div>
+
+                    <div class="visualization-container" id="vis-container-4">
+                        <div class="visualization-header">
+                            <div class="tab-container">
+                                <button class="visualization-tab active" data-panel="plot">Plot</button>
+                            </div>
+                            <button class="close-visualization" data-container="4">&times;</button>
+                        </div>
+                        <div class="visualization-content" id="vis-content-4">
+                            <div id="plot-panel-4" class="visualization-panel active">
+                                <div class="content-placeholder">
+                                    <i class="fas fa-chart-line fa-2x mb-2"></i>
+                                    <p>Ready for plot visualization</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" data-tab="structure">
+                <div class="visualization-grid">
+                    <!-- Structure View Tab Content -->
+                    <div class="visualization-container" id="structure-container-1">
+                        <div class="visualization-header">
+                            <h3>Structure View</h3>
+                        </div>
+                        <div class="visualization-content">
+                            <div class="molecule-container">
+                                <img src="{{ url_for('static', filename='images/molecule_comparison.png') }}"
+                                     alt="Molecule structure" 
+                                     class="zoomable-molecule">
+                                <div class="zoom-indicator">Zoom: 100%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visualization-container" id="structure-container-2">
+                        <div class="visualization-header">
+                            <h3>2D Structure Editor</h3>
+                        </div>
+                        <div class="visualization-content">
+                            <div class="empty-space">Interactive Structure Editor</div>
+                        </div>
+                    </div>
+                    <div class="visualization-container" id="structure-container-3">
+                        <div class="visualization-header">
+                            <h3>Structure Properties</h3>
+                        </div>
+                        <div class="visualization-content">
+                            <div class="empty-space">Molecular Properties and Analysis</div>
+                        </div>
+                    </div>
+                    <div class="visualization-container" id="structure-container-4">
+                        <div class="visualization-header">
+                            <h3>Conformer Analysis</h3>
+                        </div>
+                        <div class="visualization-content">
+                            <div class="empty-space">Conformer Energies and Statistics</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type="module">
+        import { initializeStructureTab } from "{{ url_for('static', filename='js/modules/structure/structureTabInit.js') }}";
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeStructureTab();
+        });
+    </script>
+</body>
+</html>

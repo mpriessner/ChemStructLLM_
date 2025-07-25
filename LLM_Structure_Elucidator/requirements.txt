@@ -1,0 +1,13 @@
+Flask[async]==3.0.2
+flask-socketio==5.3.6
+rdkit==2023.9.5
+anthropic==0.18.1
+openai==0.28.0
+numpy==1.26.4
+pandas==2.2.1
+requests==2.31.0
+python-dotenv==1.0.1
+plotly==5.18.0
+google-generativeai==0.3.2
+ffmpeg-python==0.2.0
+cryptography==42.0.5

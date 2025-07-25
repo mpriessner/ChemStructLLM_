@@ -1,0 +1,4 @@
+pubch000972058
+pubch001891978
+
+from here: /projects/cc/se_users/knlr326/1_NMR_project/1_NMR_data_AZ/26_PubChem_dataset/val_data_250_350_x1000

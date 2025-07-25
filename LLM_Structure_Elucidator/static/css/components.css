@@ -1,0 +1,223 @@
+/* Buttons */
+#send-button, .file-input-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+#send-button:hover, .file-input-button:not(:disabled):hover {
+    background: var(--primary-hover);
+}
+
+#clear-chat {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background: #dc3545;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+#clear-chat:hover {
+    background: #c82333;
+}
+
+/* Inputs */
+#message-input, #model-select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#message-input {
+    flex: 1;
+}
+
+#message-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Microphone Button */
+.mic-button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.mic-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.mic-button i {
+    color: white;
+    font-size: 20px;
+}
+
+.mic-button.recording {
+    background-color: #dc3545;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Page Title */
+.page-title {
+    text-align: center;
+    padding: 8px 0;
+    background-color: #2c3e50;
+    margin-bottom: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-title h1 {
+    margin: 0;
+    color: #ecf0f1;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.test-button {
+    position: absolute;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    height: 32px;
+}
+
+.test-button:hover {
+    background-color: #45a049;
+}
+
+.test-button i {
+    font-size: 16px;
+}
+
+.elucidation-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.elucidation-button:hover {
+    background-color: #45a049;
+}
+
+.elucidation-button i {
+    font-size: 16px;
+}
+
+/* File Upload Components */
+.file-input-box {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius);
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.file-list {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: var(--radius);
+    margin-bottom: 5px;
+}
+
+.file-path {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.remove-file {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 5px;
+}
+
+.upload-status {
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--radius);
+    text-align: center;
+    display: none;
+}
+
+.upload-status.success {
+    background-color: #d4edda;
+    color: #155724;
+    display: block;
+}
+
+.upload-status.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    display: block;
+}
