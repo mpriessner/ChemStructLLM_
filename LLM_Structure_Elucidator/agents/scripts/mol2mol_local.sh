@@ -11,10 +11,9 @@ CONFIG_BASE_DIR="$(cd "$BASE_DIR/.." && pwd)"  # Go up one more level to find de
 INPUT_CSV="$BASE_DIR/_temp_folder/mol2mol_selection.csv"
 CONFIG_DIR="$CONFIG_BASE_DIR"
 OUTPUT_DIR="$BASE_DIR/_temp_folder"
-# NOTE: Update these paths when you have the actual trained model files
-# Following the new model directory structure pattern
-MODEL_PATH="$CONFIG_BASE_DIR/models/mol2mol/trained/weights_pubchem_with_counts_and_rank_sanitized.ckpt"
-VOCAB_PATH="$CONFIG_BASE_DIR/models/mol2mol/trained/vocab_new.pkl"
+# Updated paths to match actual file locations
+MODEL_PATH="$CONFIG_BASE_DIR/models/mol2mol/Alessandro_big/weights_pubchem_with_counts_and_rank_sanitized.ckpt"
+VOCAB_PATH="$CONFIG_BASE_DIR/models/mol2mol/Alessandro_big/vocab_new.pkl"
 
 DELTA_WEIGHT=1
 TANIMOTO_FILTER=0.2
