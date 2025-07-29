@@ -1,9 +1,9 @@
-from molbart.utils.scores.scores import (
+from .scores import (
     BaseScore,
-    FractionInvalidScore,
-    FractionUniqueScore,
-    TanimotoSimilarityScore,
-    TopKAccuracyScore,
+    BergerScore,
+    FingerprintScore,
+    FingerprintTanimotoScore,
+    SascoreScore,
+    SimilarityScore,
 )
-
-from molbart.utils.scores.score_collection import ScoreCollection
+from .score_collection import ScoreCollection

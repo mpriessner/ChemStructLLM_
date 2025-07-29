@@ -3,7 +3,7 @@ import pandas as pd
 from rdkit import Chem
 from typing import Any, Dict, List, Tuple
 
-from molbart.data.base import ReactionListDataModule
+from .base import ReactionListDataModule
 
 
 class Uspto50DataModule(ReactionListDataModule):

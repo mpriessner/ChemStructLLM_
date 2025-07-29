@@ -6,7 +6,7 @@ import pandas as pd
 import torch
 from rdkit import Chem
 
-from molbart.data.base import MoleculeListDataModule
+from .base import MoleculeListDataModule
 
 
 class ChemblDataModule(MoleculeListDataModule):

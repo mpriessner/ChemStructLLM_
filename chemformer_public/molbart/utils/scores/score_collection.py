@@ -8,9 +8,9 @@ from typing import TYPE_CHECKING
 import yaml
 from omegaconf import ListConfig, OmegaConf
 
-from molbart.utils.base_collection import BaseCollection
-from molbart.utils.scores import BaseScore
-from molbart.utils.scores.scores import __name__ as score_module
+from ..base_collection import BaseCollection
+from . import BaseScore
+from .scores import __name__ as score_module
 
 if TYPE_CHECKING:
     from typing import Any, Dict, List, Optional

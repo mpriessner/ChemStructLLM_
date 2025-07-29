@@ -2,7 +2,7 @@
 from typing import Any, List, Optional, Tuple
 
 import torch
-from molbart.utils.tokenizers import ChemformerTokenizer, ListOfStrList, TokensMasker
+from ..utils.tokenizers import ChemformerTokenizer, ListOfStrList, TokensMasker
 
 
 class BatchEncoder:

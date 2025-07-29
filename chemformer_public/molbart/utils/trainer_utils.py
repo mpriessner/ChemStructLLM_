@@ -7,8 +7,8 @@ from omegaconf import DictConfig
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.plugins import Plugin
 
-from molbart.utils.callbacks import CallbackCollection
-from molbart.utils.scores import ScoreCollection
+from .callbacks import CallbackCollection
+from .scores import ScoreCollection
 
 
 def instantiate_callbacks(callbacks_config: Optional[DictConfig]) -> CallbackCollection:
