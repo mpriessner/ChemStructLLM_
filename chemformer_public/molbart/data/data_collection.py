@@ -8,11 +8,11 @@ from omegaconf import ListConfig, OmegaConf
 from typing import Any, Dict
 import yaml
 
-from molbart.data import _AbsDataModule
-from molbart.data.datamodules import __name__ as data_module
-from molbart.utils import data_utils
-from molbart.utils.tokenizers import ChemformerTokenizer
-from molbart.utils.base_collection import BaseCollection
+from . import _AbsDataModule
+from .datamodules import __name__ as data_module
+from ..utils import data_utils
+from ..utils.tokenizers import ChemformerTokenizer
+from ..utils.base_collection import BaseCollection
 
 
 class DataCollection(BaseCollection):

@@ -672,8 +672,6 @@ def parse_arguments(config, args):
     # Experimental workflow parameters
     if args.nmr_types:
         config.nmr_types = args.nmr_types
-    if args.exp_data_path:
-        config.exp_data_path = args.exp_data_path
     if args.multinom_runs:
         config.multinom_runs = args.multinom_runs
     return config

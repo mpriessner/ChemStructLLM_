@@ -2,7 +2,7 @@
 import pandas as pd
 from typing import Any, Dict, List, Optional, Tuple
 
-from molbart.data.base import ReactionListDataModule
+from .base import ReactionListDataModule
 
 class SynthesisDataModule(ReactionListDataModule):
     """

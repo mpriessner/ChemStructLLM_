@@ -6,10 +6,10 @@ import pandas as pd
 import pytorch_lightning as pl
 import torch
 
-from molbart.models.transformer_models import BARTModel, UnifiedModel
-from molbart.data import SynthesisDataModule
-from molbart.data.mol_data import ChemblDataModule, ZincDataModule
-from molbart.data.seq2seq_data import (
+from ..models.transformer_models import BARTModel, UnifiedModel
+from ..data import SynthesisDataModule
+from ..data.mol_data import ChemblDataModule, ZincDataModule
+from ..data.seq2seq_data import (
     MolecularOptimizationDataModule,
     Uspto50DataModule,
     UsptoMixedDataModule,
