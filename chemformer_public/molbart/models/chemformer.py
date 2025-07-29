@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 # Direct imports using full paths
 from chemformer_public.molbart.data import DataCollection
 import chemformer_public.molbart.utils.data_utils as util
-from chemformer_public.molbart.models import BARTModel, UnifiedModel
+from chemformer_public.molbart.models.transformer_models import BARTModel, UnifiedModel
 from chemformer_public.molbart.utils.samplers import BeamSearchSampler, MultinomialSearchSampler
 from chemformer_public.molbart.utils.tokenizers import ChemformerTokenizer
 import chemformer_public.molbart.utils.trainer_utils as trainer_utils
