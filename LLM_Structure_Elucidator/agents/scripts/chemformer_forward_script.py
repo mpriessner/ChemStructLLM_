@@ -41,6 +41,8 @@ def parse_arguments():
     parser.add_argument("--batch_size", type=int, default=64, help="Batch size for predictions")
     parser.add_argument("--n_beams", type=int, default=50, help="Number of beams for beam search")
     parser.add_argument("--n_unique_beams", type=int, default=-1, help="Number of unique beams to return. Use -1 for no limit")
+    parser.add_argument("--temperature", type=float, default=1.0, help="Temperature for sampling (higher = more diverse)")
+    parser.add_argument("--sampling_method", type=str, default="beam", choices=["beam", "multinomial"], help="Sampling method to use")
     return parser.parse_args()
 
 def create_config(args):
@@ -59,7 +61,8 @@ def create_config(args):
         'model_type': 'bart',
         'datamodule': ['SynthesisDataModule'],
         "device": "cuda" if torch.cuda.is_available() else "cpu",        
-
+        'temperature': args.temperature,
+        'sampling_method': args.sampling_method,
     }
     return OmegaConf.create(config)
 
