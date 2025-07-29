@@ -63,6 +63,7 @@ def create_config(args):
         "device": "cuda" if torch.cuda.is_available() else "cpu",        
         'temperature': args.temperature,
         'sampling_method': args.sampling_method,
+        'sampling_alg': args.sampling_method
     }
     return OmegaConf.create(config)
 
