@@ -11,11 +11,11 @@ from torch.utils.data import DataLoader
 
 # Direct imports using relative paths
 from ..data import DataCollection
-from .. import utils.data_utils as util
-from .transformer_models import BARTModel, UnifiedModel
+from ..utils import data_utils as util
+from .transformer_models import BARTModel, UnifiedModel  # Same directory
 from ..utils.samplers import BeamSearchSampler, MultinomialSearchSampler
 from ..utils.tokenizers import ChemformerTokenizer
-from .. import utils.trainer_utils as trainer_utils
+from ..utils import trainer_utils
 
 DEFAULT_WEIGHT_DECAY = 0
 
