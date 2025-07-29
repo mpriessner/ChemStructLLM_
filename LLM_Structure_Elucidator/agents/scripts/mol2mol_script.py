@@ -10,9 +10,10 @@ from typing import Dict, Any, Optional
 from rdkit import Chem
 
 # Add project root to path for imports
-# Go up from scripts -> agents -> LLM_Structure_Elucidator -> ChemStructLLM_ (containing utils_MMT)
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../"))
-sys.path.append(project_root)
+# Since the bash script changes to CONFIG_BASE_DIR (ChemStructLLM_ root) before running this script,
+# utils_MMT should be in the current working directory
+project_root = os.getcwd()  # Current working directory is CONFIG_BASE_DIR
+sys.path.insert(0, project_root)
 
 # Import Mol2Mol utilities
 import utils_MMT.execution_function_v15_4 as ef
