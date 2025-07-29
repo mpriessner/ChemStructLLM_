@@ -21,11 +21,29 @@ def main():
     print("=== Chemformer Retro Script Test ===")
     
     # Get the script directory
-    script_dir = Path(__file__).parent / "ChemStructLLM_/LLM_Structure_Elucidator/agents/scripts"
+    script_dir = Path(__file__).parent / "LLM_Structure_Elucidator/agents/scripts"
     chemformer_script = script_dir / "chemformer_retro_script.py"
+    
+    print(f"Looking for script at: {chemformer_script}")
     
     if not chemformer_script.exists():
         print(f"Error: Script not found at {chemformer_script}")
+        print("Let me check what's actually in the directory...")
+        
+        # Debug: show what's actually there
+        if script_dir.exists():
+            print(f"Contents of {script_dir}:")
+            for item in script_dir.iterdir():
+                print(f"  - {item.name}")
+        else:
+            print(f"Directory {script_dir} doesn't exist")
+            # Try to find the actual path
+            base_dir = Path(__file__).parent
+            print(f"Base directory: {base_dir}")
+            print("Contents of base directory:")
+            for item in base_dir.iterdir():
+                if item.is_dir():
+                    print(f"  - {item.name}/")
         return
     
     # Create test input file
