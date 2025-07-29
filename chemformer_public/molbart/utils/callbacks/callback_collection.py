@@ -9,8 +9,8 @@ import yaml
 from omegaconf import ListConfig, OmegaConf
 from pytorch_lightning.callbacks import Callback
 
-from molbart.utils.base_collection import BaseCollection
-from molbart.utils.callbacks.callbacks import __name__ as callback_module
+from ..base_collection import BaseCollection
+from .callbacks import __name__ as callback_module
 
 if TYPE_CHECKING:
     from typing import List

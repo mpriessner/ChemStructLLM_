@@ -1,9 +1,8 @@
 from .scores import (
     BaseScore,
-    BergerScore,
-    FingerprintScore,
-    FingerprintTanimotoScore,
-    SascoreScore,
-    SimilarityScore,
+    FractionInvalidScore,
+    FractionUniqueScore,
+    TanimotoSimilarityScore,
+    TopKAccuracyScore,
 )
 from .score_collection import ScoreCollection

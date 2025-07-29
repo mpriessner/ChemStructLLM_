@@ -9,13 +9,13 @@ import torch
 from omegaconf import DictConfig, ListConfig
 from torch.utils.data import DataLoader
 
-# Direct imports using full paths
-from chemformer_public.molbart.data import DataCollection
-import chemformer_public.molbart.utils.data_utils as util
-from chemformer_public.molbart.models.transformer_models import BARTModel, UnifiedModel
-from chemformer_public.molbart.utils.samplers import BeamSearchSampler, MultinomialSearchSampler
-from chemformer_public.molbart.utils.tokenizers import ChemformerTokenizer
-import chemformer_public.molbart.utils.trainer_utils as trainer_utils
+# Direct imports using relative paths
+from ..data import DataCollection
+from .. import utils.data_utils as util
+from .transformer_models import BARTModel, UnifiedModel
+from ..utils.samplers import BeamSearchSampler, MultinomialSearchSampler
+from ..utils.tokenizers import ChemformerTokenizer
+from .. import utils.trainer_utils as trainer_utils
 
 
 DEFAULT_WEIGHT_DECAY = 0

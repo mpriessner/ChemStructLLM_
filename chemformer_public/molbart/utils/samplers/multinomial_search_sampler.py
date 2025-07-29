@@ -14,12 +14,12 @@ import torch.nn.functional as F
 from pysmilesutils.tokenize import SMILESTokenizer
 from rdkit import Chem, RDLogger
 
-from molbart.utils.scores import ScoreCollection
-from molbart.utils import smiles_utils
+from ..scores import ScoreCollection
+from .. import smiles_utils
 
 if TYPE_CHECKING:
     from typing import Any, Dict, List, Tuple
-    from molbart.models.base_transformer import _AbsTransformerModel
+    from ...models.base_transformer import _AbsTransformerModel
 
 RDLogger.DisableLog("rdApp.*")
 
