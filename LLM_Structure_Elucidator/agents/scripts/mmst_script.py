@@ -28,11 +28,15 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from rdkit import Chem
 from rdkit.Chem import Draw, MolFromSmiles
+
 # Import path utilities
 import sys
 from pathlib import Path
-sys.path.append("/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/utils_MMT")
-
+# Get relative path to utils_MMT directory
+script_dir = Path(__file__).resolve().parent
+mmt_dir = script_dir.parent.parent.parent  # Go up to MMT_explainability directory
+utils_mmt_dir = mmt_dir / "utils_MMT"
+sys.path.append(str(utils_mmt_dir))
 
 # Add necessary directories to Python path
 # Get all relevant paths
@@ -668,6 +672,8 @@ def parse_arguments(config, args):
     # Experimental workflow parameters
     if args.nmr_types:
         config.nmr_types = args.nmr_types
+    if args.exp_data_path:
+        config.exp_data_path = args.exp_data_path
     if args.multinom_runs:
         config.multinom_runs = args.multinom_runs
     return config

@@ -6,8 +6,11 @@ import os
 if 'molbart' in sys.modules:
     del sys.modules['molbart']
 
-# Add the specific path to your chemformer_public directory
-sys.path.insert(0, '/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability')
+# Get the directory where this script is located and build relative path
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# Go up from scripts -> agents -> LLM_Structure_Elucidator -> parent directory
+parent_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
+sys.path.insert(0, parent_dir)
 
 # Now import from your local version
 from chemformer_public.molbart.models import Chemformer

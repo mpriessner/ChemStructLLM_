@@ -31,7 +31,11 @@ from rdkit.Chem import Draw, MolFromSmiles
 # Import path utilities
 import sys
 from pathlib import Path
-sys.path.append("/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/utils_MMT")
+# Get relative path to utils_MMT directory
+script_dir = Path(__file__).resolve().parent
+mmt_dir = script_dir.parent.parent.parent  # Go up to MMT_explainability directory
+utils_mmt_dir = mmt_dir / "utils_MMT"
+sys.path.append(str(utils_mmt_dir))
 
 
 # Add necessary directories to Python path
