@@ -15,7 +15,7 @@ mkdir -p "$(dirname "$TEMP_FOLDER/forward_predictions.csv")"
 # Default values for parameters
 INPUT_FILE="$TEMP_FOLDER/forward_targets.txt"
 OUTPUT_FILE="$TEMP_FOLDER/forward_predictions.csv"
-MODEL_PATH="$CONFIG_BASE_DIR/chemformer_public/models/fined-tuned/uspto_mixed/last_v2.ckpt"
+MODEL_PATH="$CONFIG_BASE_DIR/models/chemformer/fined-tuned/uspto_50/last_v2.ckpt"
 VOCAB_PATH="$CONFIG_BASE_DIR/chemformer_public/bart_vocab_downstream.json"
 BATCH_SIZE=64
 N_BEAMS=20 #50

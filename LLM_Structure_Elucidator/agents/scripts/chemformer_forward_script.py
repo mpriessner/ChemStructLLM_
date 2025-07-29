@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from molbart.models import Chemformer
+from chemformer_public.molbart.models import Chemformer
 import hydra
 import omegaconf
 import pandas as pd
