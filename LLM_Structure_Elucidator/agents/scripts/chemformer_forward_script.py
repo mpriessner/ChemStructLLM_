@@ -1,14 +1,29 @@
 #!/usr/bin/env python
-from chemformer_public.molbart.models import Chemformer
+import sys
+import os
+
+# Remove any existing molbart from sys.modules to avoid conflicts
+if 'molbart' in sys.modules:
+    del sys.modules['molbart']
+
+# Get the directory where this script is located and build relative path
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# Go up from scripts -> agents -> LLM_Structure_Elucidator -> ChemStructLLM_ (containing chemformer_public)
+parent_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
+sys.path.insert(0, parent_dir)
+
+# Import chemformer_public.molbart and make it available as 'molbart' for internal imports
+import chemformer_public.molbart as molbart
+sys.modules['molbart'] = molbart
+
+# Import Chemformer directly to avoid circular imports in __init__.py
+from chemformer_public.molbart.models.chemformer import Chemformer
 import hydra
 import omegaconf
 import pandas as pd
-import sys
-import os
 import numpy as np
 from pathlib import Path
 from omegaconf import OmegaConf
-import pandas as pd
 import torch
 import logging
 
