@@ -11,8 +11,10 @@ CONFIG_BASE_DIR="$(cd "$BASE_DIR/.." && pwd)"  # Go up one more level to find de
 INPUT_CSV="$BASE_DIR/_temp_folder/mol2mol_selection.csv"
 CONFIG_DIR="$CONFIG_BASE_DIR"
 OUTPUT_DIR="$BASE_DIR/_temp_folder"
-MODEL_PATH="$CONFIG_BASE_DIR/deep-molecular-optimization/experiments/trained/Alessandro_big/weights_pubchem_with_counts_and_rank_sanitized.ckpt"
-VOCAB_PATH="$CONFIG_BASE_DIR/deep-molecular-optimization/experiments/trained/Alessandro_big/vocab_new.pkl"
+# NOTE: Update these paths when you have the actual trained model files
+# Following the new model directory structure pattern
+MODEL_PATH="$CONFIG_BASE_DIR/models/mol2mol/trained/weights_pubchem_with_counts_and_rank_sanitized.ckpt"
+VOCAB_PATH="$CONFIG_BASE_DIR/models/mol2mol/trained/vocab_new.pkl"
 
 DELTA_WEIGHT=1
 TANIMOTO_FILTER=0.2
@@ -86,6 +88,9 @@ fi
 
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
+
+# Change to CONFIG_BASE_DIR so Python can find utils_MMT module
+cd "$CONFIG_BASE_DIR"
 
 # Run the Mol2Mol generation script
 echo "Starting Mol2Mol generation..."

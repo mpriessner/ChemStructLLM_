@@ -10,7 +10,8 @@ from typing import Dict, Any, Optional
 from rdkit import Chem
 
 # Add project root to path for imports
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
+# Go up from scripts -> agents -> LLM_Structure_Elucidator -> ChemStructLLM_ (containing utils_MMT)
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../"))
 sys.path.append(project_root)
 
 # Import Mol2Mol utilities
@@ -122,9 +123,12 @@ def main(args):
     
     # Run Molformer generation
     df_results, output_file = run_molformer(args)
-    print(f"Results saved to: {output_file}")
-    print(f"Generated {len(df_results)} molecule analogues")
-    print(f"Results saved to: {output_file}")    
+    if df_results is not None and output_file is not None:
+        print(f"Results saved to: {output_file}")
+        print(f"Generated {len(df_results)} molecule analogues")
+    else:
+        print("Mol2Mol generation failed - missing model files")
+        return    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run Mol2Mol generation')
