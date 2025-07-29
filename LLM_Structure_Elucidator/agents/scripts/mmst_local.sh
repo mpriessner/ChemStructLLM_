@@ -1,8 +1,22 @@
 #!/bin/bash
 
-# Base directories
-BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator"
-CONFIG_BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Base directories (relative to script location)
+BASE_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"  # Go up two levels to LLM_Structure_Elucidator root
+CONFIG_BASE_DIR="$(cd "$BASE_DIR/.." && pwd)"  # Go up one more level to ChemStructLLM_ root
+
+# Create logs directory if it doesn't exist
+mkdir -p "$BASE_DIR/logs"
+
+# Set up logging while showing output in console
+LOG_FILE="$BASE_DIR/logs/mmst_local_$(date +%Y%m%d_%H%M%S).log"
+exec &> >(tee -a "$LOG_FILE")
+
+echo "MMST Local Script"
+echo "Starting MMST Script at $(date)"
+echo "Running on node: $(hostname)"
 
 # Create necessary directories for logging
 TEMP_FOLDER="$BASE_DIR/_temp_folder/mmst_temp"
@@ -23,9 +37,9 @@ MULTINOM_RUNS=50 #30
 LEARNING_RATE=0.00005 #0.0002
 MW_TOLERANCE=0.5  
 
-# Mol2Mol parameters
-MOL2MOL_MODEL_PATH="$CONFIG_BASE_DIR/deep-molecular-optimization/experiments/trained/Alessandro_big/weights_pubchem_with_counts_and_rank_sanitized.ckpt"
-MOL2MOL_VOCAB_PATH="$CONFIG_BASE_DIR/deep-molecular-optimization/experiments/trained/Alessandro_big/vocab_new.pkl"
+# Mol2Mol parameters - Updated to use new centralized models directory
+MOL2MOL_MODEL_PATH="$CONFIG_BASE_DIR/models/mol2mol/Alessandro_big/weights_pubchem_with_counts_and_rank_sanitized.ckpt"
+MOL2MOL_VOCAB_PATH="$CONFIG_BASE_DIR/models/mol2mol/Alessandro_big/vocab_new.pkl"
 MF_DELTA_WEIGHT=50
 TANIMOTO_FILTER=0.7
 MF_MAX_TRAILS=1000 # 500
@@ -160,13 +174,32 @@ mkdir -p "$(dirname "$LOG_FILE")"
 } > "$LOG_FILE"
 
 # Initialize environment
-echo "ACTIVATE" | tee -a "$LOG_FILE"
-source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate /projects/cc/se_users/knlr326/miniconda_SE/envs/NMR_Structure_Elucidator
-module load CUDA/11.3.1
+echo "ACTIVATE"
 
-# Set wandb directory
-export WANDB_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/wandb"
+# Check if running on Windows
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+    echo "Running on Windows environment"
+    # Windows-specific conda activation
+    eval "$(conda shell.bash hook)"
+    conda activate NMR_Structure_Elucidator
+else
+    echo "Running on Linux/HPC environment"
+    # HPC-specific setup
+    module purge
+    module load CUDA/11.3.1  # Modify this according to your CUDA module system
+    
+    # Load Anaconda module and activate environment
+    # NOTE: Change these paths according to your conda installation and environment
+    source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate /projects/cc/se_users/knlr326/miniconda_SE/envs/NMR_Structure_Elucidator  # Change to your conda environment path
+    echo $(which python)
+fi
+
+# Set wandb directory relative to CONFIG_BASE_DIR
+export WANDB_DIR="$CONFIG_BASE_DIR/wandb"
 mkdir -p "$WANDB_DIR"
+
+# Change to CONFIG_BASE_DIR so Python can find utils_MMT module
+cd "$CONFIG_BASE_DIR"
 
 # Add debug mode
 set -x
@@ -320,6 +353,8 @@ except Exception as e:
   echo "========================================================"
   echo "Log file saved to: $LOG_FILE"
 } | tee -a "$LOG_FILE"
+
+echo "MMST Script completed at $(date)"
 
 # Return the exit code from the Python script
 exit $RETURN_CODE

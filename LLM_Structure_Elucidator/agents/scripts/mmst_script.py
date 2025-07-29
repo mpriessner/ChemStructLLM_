@@ -31,35 +31,18 @@ from rdkit.Chem import Draw, MolFromSmiles
 
 # Import path utilities
 import sys
+import os
 from pathlib import Path
-# Get relative path to utils_MMT directory
+
+# Add project root to path for imports
+# Since the bash script changes to CONFIG_BASE_DIR (ChemStructLLM_ root) before running this script,
+# utils_MMT should be in the current working directory
+project_root = os.getcwd()  # Current working directory is CONFIG_BASE_DIR
+sys.path.insert(0, project_root)
+
+# Try to import the local imports_MMST module
 script_dir = Path(__file__).resolve().parent
-mmt_dir = script_dir.parent.parent.parent  # Go up to MMT_explainability directory
-utils_mmt_dir = mmt_dir / "utils_MMT"
-sys.path.append(str(utils_mmt_dir))
-
-# Add necessary directories to Python path
-# Get all relevant paths
-script_dir = Path(__file__).resolve().parent  # scripts directory
-llm_dir = script_dir.parent.parent  # LLM_Structure_Elucidator directory
-mmt_dir = llm_dir.parent  # MMT_explainability directory
-mol_opt_dir = mmt_dir / "deep-molecular-optimization"  # deep-molecular-optimization directory
-
-# Clear any existing paths that might conflict
-sys.path = [p for p in sys.path if not any(str(d) in p for d in [script_dir, llm_dir, mmt_dir, mol_opt_dir])]
-
-# Add directories to path in the correct order
-sys.path.insert(0, str(mol_opt_dir))  # First priority for models.dataset
-sys.path.insert(0, str(mmt_dir))      # Second priority for utils_MMT
-sys.path.insert(0, str(script_dir))   # Top priority for imports_MMST
-
-print("Python paths added in order:")
-print(f"1. Script dir: {script_dir}")
-print(f"2. MMT dir: {mmt_dir}")
-print(f"3. Mol-opt dir: {mol_opt_dir}")
-print("\nFull Python path:")
-for p in sys.path[:5]:  # Show first 5 paths
-    print(f"  {p}")
+sys.path.insert(0, str(script_dir))
 
 # Now import the modules after path setup
 from utils_MMT.execution_function_v15_4 import *
@@ -672,6 +655,8 @@ def parse_arguments(config, args):
     # Experimental workflow parameters
     if args.nmr_types:
         config.nmr_types = args.nmr_types
+    if args.exp_data_path:
+        config.exp_data_path = args.exp_data_path
     if args.multinom_runs:
         config.multinom_runs = args.multinom_runs
     return config
