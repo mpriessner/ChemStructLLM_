@@ -12,6 +12,10 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
 sys.path.insert(0, parent_dir)
 
+# Import chemformer_public.molbart and make it available as 'molbart' for internal imports
+import chemformer_public.molbart as molbart
+sys.modules['molbart'] = molbart
+
 # Now import from your local version
 from chemformer_public.molbart.models import Chemformer
 import hydra

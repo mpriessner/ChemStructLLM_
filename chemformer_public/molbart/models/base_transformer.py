@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 from torch.optim.lr_scheduler import OneCycleLR
 
-from molbart.models.util import FuncLR
+from .util import FuncLR
 
 # ----------------------------------------------------------------------------------------------------------
 # ----------------------------------------- Base Transformer Model -----------------------------------------
