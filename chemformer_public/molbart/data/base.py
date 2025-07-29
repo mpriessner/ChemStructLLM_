@@ -15,7 +15,7 @@ from torch.utils.data import DataLoader, Dataset, SequentialSampler
 from pysmilesutils.datautils import ChunkBatchSampler
 
 from .util import BatchEncoder, build_attention_mask, build_target_mask
-from .utils.tokenizers import ChemformerTokenizer, TokensMasker
+from ..utils.tokenizers import ChemformerTokenizer, TokensMasker
 
 
 class ChemistryDataset(Dataset):
