@@ -12,12 +12,12 @@ def test_path_resolution():
     """Test the path resolution logic from chemformer_retro_script.py"""
     print("=== Testing Path Resolution ===")
     
-    # Simulate the path logic from chemformer_retro_script.py
-    script_dir = Path(__file__).parent / "ChemStructLLM_/LLM_Structure_Elucidator/agents/scripts"
-    parent_dir = script_dir.parent.parent.parent  # Go up 3 levels
+    # Simulate the path logic from chemformer_retro_script.py - fix the path
+    script_dir = Path(__file__).parent / "LLM_Structure_Elucidator/agents/scripts"
+    parent_dir = script_dir.parent.parent.parent  # Go up 3 levels to ChemStructLLM_
     
     print(f"Script directory: {script_dir}")
-    print(f"Parent directory: {parent_dir}")
+    print(f"Parent directory (ChemStructLLM_): {parent_dir}")
     print(f"Expected chemformer_public path: {parent_dir / 'chemformer_public'}")
     
     # Check if paths exist
@@ -31,7 +31,7 @@ def test_path_resolution():
             print("❌ molbart subdirectory not found")
     else:
         print("❌ chemformer_public directory not found")
-        print("Available directories in parent:")
+        print("Available directories in ChemStructLLM_:")
         if parent_dir.exists():
             for item in parent_dir.iterdir():
                 if item.is_dir():
@@ -64,7 +64,7 @@ def test_imports():
     # Test the path resolution and chemformer import
     try:
         # Add the path like the script does
-        script_dir = Path(__file__).parent / "ChemStructLLM_/LLM_Structure_Elucidator/agents/scripts"
+        script_dir = Path(__file__).parent / "LLM_Structure_Elucidator/agents/scripts"
         parent_dir = script_dir.parent.parent.parent
         sys.path.insert(0, str(parent_dir))
         

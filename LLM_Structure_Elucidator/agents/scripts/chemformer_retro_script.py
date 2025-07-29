@@ -8,7 +8,7 @@ if 'molbart' in sys.modules:
 
 # Get the directory where this script is located and build relative path
 script_dir = os.path.dirname(os.path.abspath(__file__))
-# Go up from scripts -> agents -> LLM_Structure_Elucidator -> parent directory
+# Go up from scripts -> agents -> LLM_Structure_Elucidator -> ChemStructLLM_ (containing chemformer_public)
 parent_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
 sys.path.insert(0, parent_dir)
 
