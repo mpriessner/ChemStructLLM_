@@ -7,8 +7,8 @@ import torch
 import torch.nn as nn
 from torch.optim.lr_scheduler import OneCycleLR
 
-from molbart.models import _AbsTransformerModel
-from molbart.models.util import PreNormDecoderLayer, PreNormEncoderLayer
+from .base_transformer import _AbsTransformerModel
+from .util import PreNormDecoderLayer, PreNormEncoderLayer
 
 # ----------------------------------------------------------------------------------------------------------
 # -------------------------------------------- Pre-train Models --------------------------------------------
