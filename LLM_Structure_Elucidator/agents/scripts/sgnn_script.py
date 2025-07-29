@@ -19,8 +19,10 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Add project root to path for imports
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../"))
-sys.path.append(project_root)
+# Since the bash script changes to CONFIG_BASE_DIR (ChemStructLLM_ root) before running this script,
+# utils_MMT should be in the current working directory
+project_root = os.getcwd()  # Current working directory is CONFIG_BASE_DIR
+sys.path.insert(0, project_root)
 
 # Import data generation module
 try:
