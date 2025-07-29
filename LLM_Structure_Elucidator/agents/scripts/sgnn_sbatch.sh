@@ -11,6 +11,9 @@
 #SBATCH --error=./logs/%j_sgnn_sbatch.err   # Separate error log
 #SBATCH --constraint=volta
 
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Create logs directory if it doesn't exist
 mkdir -p ./logs
 
@@ -27,7 +30,7 @@ echo "Running on node: $(hostname)"
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
     echo "Running on Windows environment"
     # Windows-specific Python execution
-    python /projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/agents/scripts/SGNN_script.py "$@" 2>&1
+    python "$SCRIPT_DIR/SGNN_script.py" "$@" 2>&1
 else
     echo "Running on Linux/HPC environment"
     # HPC-specific setup
@@ -36,7 +39,9 @@ else
 
     # Load Anaconda module and activate environment
     echo "ACTIVATE";
-    source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate  /projects/cc/se_users/knlr326/miniconda_SE/envs/NMR_Structure_Elucidator 
+    # NOTE: Change these paths according to your conda installation and environment
+    source "$SCRIPT_DIR/../miniconda_SE/bin/activate" "$SCRIPT_DIR/../miniconda_SE/envs/NMR_Structure_Elucidator" 
+    # NOTE: Change this according to your CUDA module system
     module load CUDA/11.3.1
     echo $(which python)
     export WANDB_DIR=/tmp
@@ -44,10 +49,11 @@ else
 
     echo "nvidia-smi";    
     # nvidia-smi
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/projects/cc/se_users/knlr326/miniconda_all/lib/
+    # NOTE: Change this library path according to your conda installation
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$SCRIPT_DIR/../miniconda_all/lib/"
     echo "python";
-    # Run the Python script
-    python /projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/agents/scripts/sgnn_script.py "$@" 2>&1
+    # Run the Python script with relative paths
+    python "$SCRIPT_DIR/sgnn_script.py" "$@" 2>&1
 fi
 
 echo "SGNN Script completed at $(date)"

@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# Base directories
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator"
-CONFIG_BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability"
-
+# Base directories (relative to script location)
+BASE_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"  # Go up two levels to LLM_Structure_Elucidator root
+CONFIG_BASE_DIR="$(cd "$BASE_DIR/.." && pwd)"  # Go up one more level to find deep-molecular-optimization
 
 # Default values for parameters
 INPUT_CSV="$BASE_DIR/_temp_folder/mol2mol_selection.csv"
@@ -20,8 +21,9 @@ MAX_TRIALS=500 #500
 MAX_SCAFFOLD_GENERATIONS=500 #100
 
 echo "ACTIVATE";
-source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate  /projects/cc/se_users/knlr326/miniconda_SE/envs/NMR_Structure_Elucidator 
-module load CUDA/11.3.1
+# NOTE: Change these paths according to your conda installation and environment
+source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate  /projects/cc/se_users/knlr326/miniconda_SE/envs/NMR_Structure_Elucidator  # Change to your conda environment path
+module load CUDA/11.3.1  # Modify this according to your CUDA module system
 echo $(which python)
 
 # Parse command line arguments
@@ -84,13 +86,6 @@ fi
 
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
-
-# Get the directory where this script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-# Set up Python environment (adjust as needed)
-# Assuming you have a conda environment named 'mol2mol'
-# conda activate mol2mol
 
 # Run the Mol2Mol generation script
 echo "Starting Mol2Mol generation..."

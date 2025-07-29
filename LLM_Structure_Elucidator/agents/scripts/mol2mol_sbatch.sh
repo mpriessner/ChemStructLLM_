@@ -7,14 +7,17 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mem=64g
 #SBATCH --time=0-1:00:00
+# NOTE: Change this output path according to your setup
 #SBATCH --output=/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator/agents/scripts/logs/mol2mol_sbatch_%j_%N.txt
 
 #SBATCH --constraint=volta
 
-# Base directories
-BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator"
-CONFIG_BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability"
-SCRIPT_DIR="$BASE_DIR/agents/scripts"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Base directories (relative to script location)
+BASE_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"  # Go up two levels to LLM_Structure_Elucidator root
+CONFIG_BASE_DIR="$(cd "$BASE_DIR/.." && pwd)"  # Go up one more level to find deep-molecular-optimization
 
 # Default values for parameters
 INPUT_CSV="$BASE_DIR/_temp_folder/mol2mol_selection.csv"
@@ -30,8 +33,9 @@ MAX_SCAFFOLD_GENERATIONS=10
 
  
 echo "ACTIVATE";
-source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate  /projects/cc/se_users/knlr326/miniconda_SE/envs/NMR_Structure_Elucidator 
-module load CUDA/11.3.1
+# NOTE: Change these paths according to your conda installation and environment
+source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate  /projects/cc/se_users/knlr326/miniconda_SE/envs/NMR_Structure_Elucidator  # Change to your conda environment path
+module load CUDA/11.3.1  # Modify this according to your CUDA module system
 echo $(which python)
 
 # Parse command line arguments

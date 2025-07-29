@@ -1,8 +1,11 @@
 #!/bin/bash
 
-# Base directories
-BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator"
-CONFIG_BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Base directories (relative to script location)
+BASE_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"  # Go up two levels to LLM_Structure_Elucidator root
+CONFIG_BASE_DIR="$(cd "$BASE_DIR/.." && pwd)"  # Go up one more level to find chemformer_public
 
 # Create necessary directories
 TEMP_FOLDER="$BASE_DIR/_temp_folder"
@@ -19,9 +22,10 @@ N_BEAMS=20 #50
 N_UNIQUE_BEAMS=-1
 
 # Initialize environment
-module load CUDA/11.3.1
-eval "$(/projects/cc/se_users/knlr326/miniconda_SE/bin/conda shell.bash hook)"
-source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate /projects/cc/se_users/knlr326/miniconda_SE/envs/chemformer
+# NOTE: Change these paths according to your CUDA and conda installation
+module load CUDA/11.3.1  # Modify this according to your CUDA module system
+eval "$(/projects/cc/se_users/knlr326/miniconda_SE/bin/conda shell.bash hook)"  # Change to your conda path
+source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate /projects/cc/se_users/knlr326/miniconda_SE/envs/chemformer  # Change to your conda environment path
 
 # Verify environment
 echo "Python path: $(which python)"

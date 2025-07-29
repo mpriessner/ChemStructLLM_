@@ -1,8 +1,11 @@
 #!/bin/bash
 
-# Base directories
-BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability/LLM_Structure_Elucidator"
-CONFIG_BASE_DIR="/projects/cc/se_users/knlr326/1_NMR_project/2_Notebooks/MMT_explainability"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Base directories (relative to script location)
+BASE_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"  # Go up two levels to LLM_Structure_Elucidator root
+CONFIG_BASE_DIR="$(cd "$BASE_DIR/.." && pwd)"  # Go up one more level to find chemformer_public
 
 # Create necessary directories
 TEMP_FOLDER="$BASE_DIR/_temp_folder"
@@ -24,9 +27,10 @@ TEMPERATURE=1.0
 SAMPLING_METHOD="beam"
 
 # Initialize environment
-module load CUDA/11.3.1
-eval "$(/projects/cc/se_users/knlr326/miniconda_SE/bin/conda shell.bash hook)"
-source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate /projects/cc/se_users/knlr326/miniconda_SE/envs/chemformer
+# NOTE: Change these paths according to your CUDA and conda installation
+module load CUDA/11.3.1  # Modify this according to your CUDA module system
+eval "$(/projects/cc/se_users/knlr326/miniconda_SE/bin/conda shell.bash hook)"  # Change to your conda path
+source /projects/cc/se_users/knlr326/miniconda_SE/bin/activate /projects/cc/se_users/knlr326/miniconda_SE/envs/chemformer  # Change to your conda environment path
 
 # Start the log file with a timestamp and configuration info
 {
@@ -122,7 +126,7 @@ echo "" >> "$LOG_FILE"
 
 # Run the Python script with unbuffered output and capture all output to the log file
 # PYTHONUNBUFFERED=1 ensures Python doesn't buffer its output
-PYTHONUNBUFFERED=1 python -u "$BASE_DIR/agents/scripts/chemformer_retro_script.py" \
+PYTHONUNBUFFERED=1 python -u "$SCRIPT_DIR/chemformer_retro_script.py" \
     --input_file="$INPUT_FILE" \
     --output_file="$OUTPUT_FILE" \
     --vocab_path="$VOCAB_PATH" \
