@@ -16,8 +16,8 @@ sys.path.insert(0, parent_dir)
 import chemformer_public.molbart as molbart
 sys.modules['molbart'] = molbart
 
-# Now import from your local version
-from chemformer_public.molbart.models import Chemformer
+# Import Chemformer directly to avoid circular imports in __init__.py
+from chemformer_public.molbart.models.chemformer import Chemformer
 import hydra
 import omegaconf
 import pandas as pd
