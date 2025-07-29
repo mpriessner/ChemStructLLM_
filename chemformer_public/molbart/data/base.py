@@ -14,8 +14,8 @@ from rdkit import Chem
 from torch.utils.data import DataLoader, Dataset, SequentialSampler
 from pysmilesutils.datautils import ChunkBatchSampler
 
-from molbart.data.util import BatchEncoder, build_attention_mask, build_target_mask
-from molbart.utils.tokenizers import ChemformerTokenizer, TokensMasker
+from .util import BatchEncoder, build_attention_mask, build_target_mask
+from .utils.tokenizers import ChemformerTokenizer, TokensMasker
 
 
 class ChemistryDataset(Dataset):
