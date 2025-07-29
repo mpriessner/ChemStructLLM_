@@ -17,7 +17,6 @@ from ..utils.samplers import BeamSearchSampler, MultinomialSearchSampler
 from ..utils.tokenizers import ChemformerTokenizer
 from .. import utils.trainer_utils as trainer_utils
 
-
 DEFAULT_WEIGHT_DECAY = 0
 
 
