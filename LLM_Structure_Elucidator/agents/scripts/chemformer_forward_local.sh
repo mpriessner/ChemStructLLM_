@@ -88,6 +88,9 @@ if [ ! -f "$VOCAB_PATH" ]; then
     exit 1
 fi
 
+# Change to CONFIG_BASE_DIR so Python can find chemformer_public module
+cd "$CONFIG_BASE_DIR"
+
 # Run the Python script
 python "$BASE_DIR/agents/scripts/chemformer_forward_script.py" \
     --input_file="$INPUT_FILE" \
