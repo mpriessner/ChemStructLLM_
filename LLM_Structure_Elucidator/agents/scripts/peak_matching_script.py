@@ -16,6 +16,11 @@ sys.path.insert(0, project_root)
 script_dir = Path(__file__).resolve().parent
 sys.path.insert(0, str(script_dir))
 
+# Add deep-molecular-optimization directory for utils_MMT imports
+deep_mol_opt_dir = Path(project_root) / "deep-molecular-optimization"
+if deep_mol_opt_dir.exists():
+    sys.path.insert(0, str(deep_mol_opt_dir))
+
 # Constants for directories
 TEMP_DIR = Path(project_root) / "LLM_Structure_Elucidator" / "_temp_folder" / "peak_matching"
 CURRENT_RUN_DIR = TEMP_DIR / "current_run"
