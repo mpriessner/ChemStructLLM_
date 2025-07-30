@@ -40,6 +40,11 @@ from pathlib import Path
 project_root = os.getcwd()  # Current working directory is CONFIG_BASE_DIR
 sys.path.insert(0, project_root)
 
+# Add deep-molecular-optimization directory for models.dataset import
+deep_mol_opt_dir = os.path.join(project_root, "deep-molecular-optimization")
+if os.path.exists(deep_mol_opt_dir):
+    sys.path.insert(0, deep_mol_opt_dir)
+
 # Try to import the local imports_MMST module
 script_dir = Path(__file__).resolve().parent
 sys.path.insert(0, str(script_dir))
