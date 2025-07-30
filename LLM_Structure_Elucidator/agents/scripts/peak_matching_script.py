@@ -47,9 +47,32 @@ logger.info(f"Logging initialized. Log file: {log_file}")
 logger.info(f"Project root: {project_root}")
 logger.info(f"Python path setup complete")
 
-# Import required utilities
-from utils_MMT.agents_code_v15_4_3 import generate_shifts_batch, add_atom_index_column
-from utils_MMT import similarity_functions_exp_v15_4 as sfe
+
+# Import required utilities with error handling
+try:
+    logger.info("Attempting to import utils_MMT modules...")
+    from utils_MMT.agents_code_v15_4_3 import generate_shifts_batch, add_atom_index_column
+    from utils_MMT import similarity_functions_exp_v15_4 as sfe
+    logger.info("Successfully imported utils_MMT modules")
+except ImportError as e:
+    error_msg = f"Failed to import utils_MMT modules: {str(e)}"
+    logger.error(error_msg)
+    print(error_msg)
+    
+    # Create error file immediately
+    try:
+        error_file = CURRENT_RUN_DIR / 'error.log'
+        error_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(error_file, 'w') as f:
+            f.write(f"Import Error: {str(e)}\n")
+            f.write(f"Python path: {sys.path}\n")
+            f.write(f"Working directory: {os.getcwd()}\n")
+            f.write(f"Project root: {project_root}\n")
+    except Exception as write_error:
+        print(f"Could not write error file: {write_error}")
+    
+    sys.exit(1)
+
 
 def extract_values(data_dict: Dict, key: str) -> List:
     """Extract values from potentially nested dictionary structures."""
@@ -438,14 +461,69 @@ async def process_peak_matching(input_path: str) -> Dict[str, Any]:
         return error_result
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python peak_matching_script.py <input_json_path>")
+    try:
+        logger.info("Peak matching script started")
+        logger.info(f"Python executable: {sys.executable}")
+        logger.info(f"Python version: {sys.version}")
+        logger.info(f"Current working directory: {os.getcwd()}")
+        logger.info(f"Script arguments: {sys.argv}")
+        
+        if len(sys.argv) != 2:
+            error_msg = "Usage: python peak_matching_script.py <input_json_path>"
+            logger.error(error_msg)
+            print(error_msg)
+            sys.exit(1)
+            
+        input_path = sys.argv[1]
+        logger.info(f"Input path: {input_path}")
+        
+        if not os.path.exists(input_path):
+            error_msg = f"Error: Input file not found at {input_path}"
+            logger.error(error_msg)
+            print(error_msg)
+            sys.exit(1)
+            
+        logger.info("Starting peak matching process...")
+        
+        # Run the async function
+        result = asyncio.run(process_peak_matching(input_path))
+        
+        logger.info("Peak matching process completed successfully")
+        logger.info(f"Result: {result}")
+        
+    except ImportError as e:
+        error_msg = f"Import error in peak matching script: {str(e)}"
+        logger.error(error_msg)
+        print(error_msg)
+        
+        # Create error file for the tool to detect
+        try:
+            error_file = Path(sys.argv[1]).parent / 'error.log' if len(sys.argv) > 1 else Path('error.log')
+            with open(error_file, 'w') as f:
+                f.write(f"Import Error: {str(e)}\n")
+                f.write(f"Python path: {sys.path}\n")
+                f.write(f"Working directory: {os.getcwd()}\n")
+        except Exception:
+            pass
         sys.exit(1)
         
-    input_path = sys.argv[1]
-    if not os.path.exists(input_path):
-        print(f"Error: Input file not found at {input_path}")
-        sys.exit(1)
+    except Exception as e:
+        error_msg = f"Unexpected error in peak matching script: {str(e)}"
+        logger.error(error_msg)
+        logger.error(f"Error type: {type(e).__name__}")
+        logger.error(f"Error traceback:", exc_info=True)
+        print(error_msg)
         
-    # Run the async function
-    result = asyncio.run(process_peak_matching(input_path))
+        # Create error file for the tool to detect
+        try:
+            error_file = Path(sys.argv[1]).parent / 'error.log' if len(sys.argv) > 1 else Path('error.log')
+            with open(error_file, 'w') as f:
+                f.write(f"Error: {str(e)}\n")
+                f.write(f"Error type: {type(e).__name__}\n")
+                f.write(f"Python path: {sys.path}\n")
+                f.write(f"Working directory: {os.getcwd()}\n")
+                import traceback
+                f.write(f"Traceback:\n{traceback.format_exc()}\n")
+        except Exception:
+            pass
+        sys.exit(1)
