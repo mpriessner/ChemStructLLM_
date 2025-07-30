@@ -7,20 +7,26 @@ import sys
 import os
 from pathlib import Path
 
-# Change to CONFIG_BASE_DIR like the bash script does
-os.chdir('/Users/mpriessner/windsurf_repos/ChemStructLLM_')
+# Get the directory where this script is located
+test_script_dir = Path(__file__).resolve().parent
+
+# Find the ChemStructLLM_ root directory (should be the same as test_script_dir)
+project_root = test_script_dir
+
+# Change to project root like the bash script does
+os.chdir(project_root)
 
 # Add project root to path for imports
-project_root = os.getcwd()
-sys.path.insert(0, project_root)
+sys.path.insert(0, str(project_root))
 
-# Add script directory to path
-script_dir = Path(__file__).resolve().parent
-sys.path.insert(0, str(script_dir))
+# Add scripts directory to path for imports_MMST
+scripts_dir = project_root / "LLM_Structure_Elucidator" / "agents" / "scripts"
+sys.path.insert(0, str(scripts_dir))
 
 print("Testing MMST imports...")
 print(f"Current working directory: {os.getcwd()}")
-print(f"Python path includes: {sys.path[:3]}")
+print(f"Project root: {project_root}")
+print(f"Scripts dir: {scripts_dir}")
 
 try:
     print("\n1. Testing utils_MMT imports...")
@@ -34,10 +40,6 @@ try:
     print("✅ utils_MMT.data_generation_v15_4 imported successfully")
     
     print("\n2. Testing imports_MMST...")
-    # Add the scripts directory to path for imports_MMST
-    scripts_dir = Path('/Users/mpriessner/windsurf_repos/ChemStructLLM_/LLM_Structure_Elucidator/agents/scripts')
-    sys.path.insert(0, str(scripts_dir))
-    
     from imports_MMST import (
         mtf, ex, mrtf, hf,
         parse_arguments, load_config, save_updated_config,
@@ -51,5 +53,13 @@ except ImportError as e:
     print(f"❌ Import error: {e}")
     print(f"Current working directory: {os.getcwd()}")
     print(f"Python path: {sys.path[:5]}")
+    
+    # Check if directories exist
+    print(f"\nDebugging info:")
+    print(f"utils_MMT exists: {(project_root / 'utils_MMT').exists()}")
+    print(f"scripts dir exists: {scripts_dir.exists()}")
+    if scripts_dir.exists():
+        print(f"imports_MMST.py exists: {(scripts_dir / 'imports_MMST.py').exists()}")
+        
 except Exception as e:
     print(f"❌ Other error: {e}")
