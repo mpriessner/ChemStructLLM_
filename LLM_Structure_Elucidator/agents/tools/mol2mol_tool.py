@@ -13,7 +13,7 @@ import json
 import sys
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from utils.sbatch_utils import execute_sbatch, wait_for_job_completion
-from handlers.molecule_handler import MoleculeHandler
+from models.molecule import MoleculeHandler
 
 # Constants for paths and directories
 BASE_DIR = Path(__file__).parent.parent.parent
