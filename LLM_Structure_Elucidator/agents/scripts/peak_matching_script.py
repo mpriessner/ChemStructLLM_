@@ -8,13 +8,21 @@ from pathlib import Path
 from typing import Dict, Any, Union, List
 import asyncio
 
-# Constants
-PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
-TOOLS_DIR = PROJECT_ROOT / "LLM_Structure_Elucidator" / "agents" / "tools"
-TEMP_DIR = PROJECT_ROOT / "LLM_Structure_Elucidator" / "_temp_folder" / "peak_matching"
+# Simple path setup - since bash script changes to project root before running this script
+project_root = os.getcwd()  # Current working directory is project root
+sys.path.insert(0, project_root)
+
+# Add scripts directory for any local imports
+script_dir = Path(__file__).resolve().parent
+sys.path.insert(0, str(script_dir))
+
+# Constants for directories
+TEMP_DIR = Path(project_root) / "LLM_Structure_Elucidator" / "_temp_folder" / "peak_matching"
 CURRENT_RUN_DIR = TEMP_DIR / "current_run"
-print("PROJECT_ROOT")
-print(PROJECT_ROOT)
+
+print("PROJECT_ROOT:", project_root)
+print("TEMP_DIR:", TEMP_DIR)
+
 # Constants for peak matching
 SUPPORTED_MATCHING_MODES = ['hung_dist_nn', 'euc_dist_all']
 SUPPORTED_ERROR_TYPES = ['sum', 'avg']
@@ -31,16 +39,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 logger.info(f"Logging initialized. Log file: {log_file}")
-
-# Add project root and tools directory to path for direct import
-project_root_path = str(PROJECT_ROOT)
-tools_path = str(TOOLS_DIR)
-if project_root_path not in sys.path:
-    sys.path.insert(0, project_root_path)
-    logger.info(f"Added to Python path: {project_root_path}")
-if tools_path not in sys.path:
-    sys.path.insert(0, tools_path)
-    logger.info(f"Added to Python path: {tools_path}")
+logger.info(f"Project root: {project_root}")
+logger.info(f"Python path setup complete")
 
 # Import required utilities
 from utils_MMT.agents_code_v15_4_3 import generate_shifts_batch, add_atom_index_column

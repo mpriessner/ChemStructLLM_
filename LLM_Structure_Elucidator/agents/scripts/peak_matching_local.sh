@@ -66,6 +66,10 @@ else
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/projects/cc/se_users/knlr326/miniconda_all/lib/
     
     echo "[$(date)] python"    
+    # Change to project root for consistent imports
+    cd "$PROJECT_ROOT"
+    echo "[$(date)] Changed to project root: $(pwd)"
+    
     # Run the Python script
     echo "[$(date)] Running peak matching script..."
     echo "[$(date)] Python executable: $(which python)"
