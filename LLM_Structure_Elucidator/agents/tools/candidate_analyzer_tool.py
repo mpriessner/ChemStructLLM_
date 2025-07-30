@@ -672,7 +672,32 @@ class CandidateAnalyzerTool:
 
             # Determine which spectra are available for matching
             available_spectra = []
+            
+            # Debug logging to see what we actually have
+            self.logger.info(f"Experimental spectra keys after processing: {list(experimental_spectra.keys())}")
+            self.logger.info(f"Predicted spectra keys after processing: {list(predicted_spectra.keys())}")
+            
             for st in ["1H", "13C", "HSQC", "COSY"]:
+                self.logger.info(f"Checking spectrum type: {st}")
+                self.logger.info(f"  - In experimental: {st in experimental_spectra}")
+                self.logger.info(f"  - In predicted: {st in predicted_spectra}")
+                
+                if st in experimental_spectra:
+                    exp_data = experimental_spectra[st]
+                    self.logger.info(f"  - Experimental {st} keys: {list(exp_data.keys()) if exp_data else 'None'}")
+                    if st in ["1H", "13C"] and exp_data and 'shifts' in exp_data:
+                        self.logger.info(f"  - Experimental {st} shifts length: {len(exp_data['shifts'])}")
+                    elif st in ["HSQC", "COSY"] and exp_data and 'F1 (ppm)' in exp_data:
+                        self.logger.info(f"  - Experimental {st} F1 length: {len(exp_data['F1 (ppm)'])}")
+                        
+                if st in predicted_spectra:
+                    pred_data = predicted_spectra[st]
+                    self.logger.info(f"  - Predicted {st} keys: {list(pred_data.keys()) if pred_data else 'None'}")
+                    if st in ["1H", "13C"] and pred_data and 'shifts' in pred_data:
+                        self.logger.info(f"  - Predicted {st} shifts length: {len(pred_data['shifts'])}")
+                    elif st in ["HSQC", "COSY"] and pred_data and 'F1 (ppm)' in pred_data:
+                        self.logger.info(f"  - Predicted {st} F1 length: {len(pred_data['F1 (ppm)'])}")
+                
                 # Both experimental and predicted data use base spectrum type
                 if st in experimental_spectra and st in predicted_spectra:
                     # For 1D spectra (1H, 13C)
@@ -680,12 +705,14 @@ class CandidateAnalyzerTool:
                         if (len(experimental_spectra[st]['shifts']) > 0 and 
                             len(predicted_spectra[st]['shifts']) > 0):
                             available_spectra.append(st)
+                            self.logger.info(f"  - Added {st} to available spectra")
                     # For 2D spectra (HSQC, COSY)
                     else:
                         if (len(experimental_spectra[st]['F1 (ppm)']) > 0 and 
                             len(predicted_spectra[st]['F1 (ppm)']) > 0):
                             available_spectra.append(st)
-
+                            self.logger.info(f"  - Added {st} to available spectra")
+            
             # Check if we have any spectra to analyze
             if not available_spectra:
                 self.logger.error(f"No matching spectra available for analysis of {smiles}")
