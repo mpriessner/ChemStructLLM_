@@ -15,9 +15,13 @@
     <script src="https://3dmol.org/build/3Dmol.ui-min.js"></script>
 
     <!-- Kekule.js Dependencies -->
-    <link rel="stylesheet" href="https://unpkg.com/kekule/dist/themes/default/kekule.css">
     <script src="https://unpkg.com/kekule/dist/kekule.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/kekule/dist/themes/default/kekule.css">
+    
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.4/socket.io.js"></script>
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -28,9 +32,6 @@
         }
     </script>
     
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="page-title">
