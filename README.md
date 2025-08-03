@@ -1,6 +1,6 @@
 # ChemStructLLM: Enhancing Molecular Structure Elucidation with Reasoning-Capable LLMs 
 
-![ChemStructLLM Graphical Abstract](GA_2.png)
+![ChemStructLLM Graphical Abstract](images/GA_2.png)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15317373.svg)](https://zenodo.org/records/15317373)
 
 This repository contains the implementation of our paper: "Enhancing Molecular Structure Elucidation with Reasoning-Capable LLMs" by Martin Priessner, Richard J. Lewis, Magnus J. Johansson, Jonathan M. Goodman, Jon Paul Janet, and Anna Tomberg.
