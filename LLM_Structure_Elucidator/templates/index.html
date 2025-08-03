@@ -15,13 +15,9 @@
     <script src="https://3dmol.org/build/3Dmol.ui-min.js"></script>
 
     <!-- Kekule.js Dependencies -->
-    <script src="https://unpkg.com/kekule/dist/kekule.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/kekule/dist/themes/default/kekule.css">
-    
-    <!-- Socket.IO -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.4/socket.io.js"></script>
-    
-    <!-- Styles -->
+    <script src="https://unpkg.com/kekule/dist/kekule.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -32,6 +28,9 @@
         }
     </script>
     
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="page-title">
@@ -69,10 +68,7 @@
         <div class="visualization-panel">
             <div class="tab-bar">
                 <button class="tab-button active" data-tab="nmr">NMR Analysis</button>
-                <button class="tab-button tab-future" data-tab="structure">
-                    Structure View
-                    <span class="future-badge">Future</span>
-                </button>
+                <button class="tab-button" data-tab="structure">Structure View <span class="future-badge">WIP</span></button>
             </div>
             <div class="tab-content active" data-tab="nmr">
                 <div class="visualization-grid">
@@ -153,50 +149,41 @@
             <div class="tab-content" data-tab="structure">
                 <div class="visualization-grid">
                     <!-- Structure View Tab Content -->
-                    <div class="visualization-container structure-wip" id="structure-container-1">
+                    <div class="visualization-container" id="structure-container-1">
                         <div class="visualization-header">
-                            <h3>Structure View <span class="wip-indicator">🚧 Under Development</span></h3>
+                            <h3>Structure View</h3>
                         </div>
                         <div class="visualization-content">
-                            <div class="wip-notice">
-                                <i class="fas fa-tools fa-3x mb-3"></i>
-                                <h4>Feature Under Development</h4>
-                                <p>This functionality is currently being developed and is not yet available.</p>
-                                <p>Focus is currently on <strong>NMR Analysis</strong> features.</p>
+                            <div class="molecule-container">
+                                <img src="{{ url_for('static', filename='images/molecule_comparison.png') }}"
+                                     alt="Molecule structure" 
+                                     class="zoomable-molecule">
+                                <div class="zoom-indicator">Zoom: 100%</div>
                             </div>
                         </div>
                     </div>
-                    <div class="visualization-container structure-wip" id="structure-container-2">
+                    <div class="visualization-container" id="structure-container-2">
                         <div class="visualization-header">
-                            <h3>2D Structure Editor <span class="wip-indicator">🚧 Planned</span></h3>
+                            <h3>2D Structure Editor</h3>
                         </div>
                         <div class="visualization-content">
-                            <div class="wip-notice">
-                                <i class="fas fa-drafting-compass fa-2x mb-2"></i>
-                                <p>Interactive structure editing capabilities coming soon</p>
-                            </div>
+                            <div class="empty-space">Interactive Structure Editor</div>
                         </div>
                     </div>
-                    <div class="visualization-container structure-wip" id="structure-container-3">
+                    <div class="visualization-container" id="structure-container-3">
                         <div class="visualization-header">
-                            <h3>Structure Properties <span class="wip-indicator">🚧 Planned</span></h3>
+                            <h3>Structure Properties</h3>
                         </div>
                         <div class="visualization-content">
-                            <div class="wip-notice">
-                                <i class="fas fa-calculator fa-2x mb-2"></i>
-                                <p>Molecular properties and analysis tools in development</p>
-                            </div>
+                            <div class="empty-space">Molecular Properties and Analysis</div>
                         </div>
                     </div>
-                    <div class="visualization-container structure-wip" id="structure-container-4">
+                    <div class="visualization-container" id="structure-container-4">
                         <div class="visualization-header">
-                            <h3>Conformer Analysis <span class="wip-indicator">🚧 Planned</span></h3>
+                            <h3>Conformer Analysis</h3>
                         </div>
                         <div class="visualization-content">
-                            <div class="wip-notice">
-                                <i class="fas fa-atom fa-2x mb-2"></i>
-                                <p>Conformer energies and statistics analysis coming soon</p>
-                            </div>
+                            <div class="empty-space">Conformer Energies and Statistics</div>
                         </div>
                     </div>
                 </div>

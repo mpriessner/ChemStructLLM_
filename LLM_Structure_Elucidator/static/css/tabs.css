@@ -40,6 +40,21 @@
     background: var(--primary-color);
 }
 
+/* Badge styling for WIP/Future indicators */
+.future-badge {
+    display: inline-block;
+    background: #ffc107;
+    color: #212529;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
 .tab-content {
     display: none;
     flex: 1;
