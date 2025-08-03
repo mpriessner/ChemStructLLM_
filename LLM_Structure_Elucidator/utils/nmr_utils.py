@@ -153,7 +153,7 @@ def generate_nmr_data(smiles, plot_type='proton', use_real_data=True):
                     if plot_type in ['proton', 'carbon']:
                         processed_data = process_1d_nmr_data(real_data, plot_type)
                     else:  # hsqc, cosy
-                        processed_data = process_2d_nmr_data(real_data)
+                        processed_data = process_2d_nmr_data(real_data, plot_type)
                     
                     return processed_data, False  # False = not random, real data
                 else:
@@ -180,7 +180,7 @@ def generate_nmr_data(smiles, plot_type='proton', use_real_data=True):
                 if plot_type in ['proton', 'carbon']:
                     processed_data = process_1d_nmr_data(csv_data[csv_key], plot_type)
                 else:  # hsqc, cosy
-                    processed_data = process_2d_nmr_data(csv_data[csv_key])
+                    processed_data = process_2d_nmr_data(csv_data[csv_key], plot_type)
                 
                 return processed_data, False  # False = not random, real data
     
