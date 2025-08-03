@@ -115,29 +115,79 @@ def load_nmr_data_from_csv(smiles, csv_path=None):
         return None
 
 def generate_nmr_data(smiles, plot_type='proton', use_real_data=True):
-    """Generate NMR data, using real data if available, falling back to random if not."""
-    try:
-        print(f"\n[NMR Utils] Generating NMR data for SMILES: {smiles}")
-
-        using_random_data = False
-        if use_real_data and smiles:
-            print("[NMR Utils] Attempting to load real NMR data...")
-            real_data = load_nmr_data_from_csv(smiles)
-            if real_data and plot_type in real_data:
-                print(f"[NMR Utils] Found real NMR data for {plot_type}")
-                if plot_type in ['hsqc', 'cosy']:
-                    return process_2d_nmr_data(real_data[plot_type], plot_type), False
-                else:
-                    return process_1d_nmr_data(real_data[plot_type], plot_type), False
-            else:
-                print("[NMR Utils] No real NMR data found, falling back to default data")
-                using_random_data = True
+    """Generate NMR data for a given SMILES string and plot type.
+    
+    Args:
+        smiles: SMILES string of the molecule
+        plot_type: Type of NMR plot ('proton', 'carbon', 'hsqc', 'cosy')
+        use_real_data: Whether to try loading real experimental data first
+        
+    Returns:
+        tuple: (nmr_data, is_random) where is_random indicates if data was simulated
+    """
+    print(f"\n[NMR Utils] Generating {plot_type} NMR data for SMILES: {smiles}")
+    print(f"[NMR Utils] Use real data: {use_real_data}")
+    
+    if use_real_data and smiles:
+        # First try to get data from uploaded molecular_data.json
+        try:
+            from handlers.molecule_handler import get_nmr_data_from_json
+            json_data = get_nmr_data_from_json(smiles)
+            print(f"[NMR Utils] JSON data retrieved: {json_data is not None}")
+            
+            if json_data:
+                # Map plot types to data keys
+                key_mapping = {
+                    'proton': '1H_exp',
+                    'carbon': '13C_exp', 
+                    'hsqc': 'HSQC_exp',
+                    'cosy': 'COSY_exp'
+                }
                 
-        print("[NMR Utils] Generating random NMR data")
-        return generate_default_nmr_data(plot_type), True
-    except Exception as e:
-        print(f"[NMR Utils] Error generating NMR data: {str(e)}")
-        raise RuntimeError(f"Failed to generate {plot_type} NMR data: {str(e)}")
+                data_key = key_mapping.get(plot_type)
+                if data_key and json_data.get(data_key):
+                    real_data = json_data[data_key]
+                    print(f"[NMR Utils] Found real {plot_type} data in uploaded files")
+                    
+                    # Process the real data based on plot type
+                    if plot_type in ['proton', 'carbon']:
+                        processed_data = process_1d_nmr_data(real_data)
+                    else:  # hsqc, cosy
+                        processed_data = process_2d_nmr_data(real_data)
+                    
+                    return processed_data, False  # False = not random, real data
+                else:
+                    print(f"[NMR Utils] No {plot_type} data found in uploaded files")
+        except Exception as e:
+            print(f"[NMR Utils] Error loading from JSON: {str(e)}")
+        
+        # Fallback to CSV loading (original behavior)
+        csv_data = load_nmr_data_from_csv(smiles)
+        if csv_data:
+            # Map plot types to CSV data keys
+            csv_key_mapping = {
+                'proton': 'proton',
+                'carbon': 'carbon',
+                'hsqc': 'hsqc',
+                'cosy': 'cosy'
+            }
+            
+            csv_key = csv_key_mapping.get(plot_type)
+            if csv_key and csv_data.get(csv_key):
+                print(f"[NMR Utils] Found real {plot_type} data in CSV")
+                
+                # Process the real data based on plot type
+                if plot_type in ['proton', 'carbon']:
+                    processed_data = process_1d_nmr_data(csv_data[csv_key])
+                else:  # hsqc, cosy
+                    processed_data = process_2d_nmr_data(csv_data[csv_key])
+                
+                return processed_data, False  # False = not random, real data
+    
+    # Generate default (simulated) data if no real data found
+    print(f"[NMR Utils] No real data found, generating simulated {plot_type} data")
+    default_data = generate_default_nmr_data(plot_type)
+    return default_data, True  # True = random/simulated data
 
 def process_1d_nmr_data(peaks_data, plot_type):
     """Process 1D NMR data (proton or carbon) into plottable format."""
