@@ -140,7 +140,7 @@ class NMRPlotAgent(BaseAgent):
             # Get current SMILES from context if available
             current_smiles = None
             if context and 'current_molecule' in context:
-                current_smiles = context['current_molecule'].get('SMILES')  # Note: Using uppercase SMILES
+                current_smiles = context['current_molecule'].get('smiles')  # Fixed: Using lowercase smiles
                 print(f"[NMR Plot Agent] Current molecule SMILES from context: {current_smiles}")
             else:
                 print("[NMR Plot Agent] No current molecule in context")
