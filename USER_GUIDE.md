@@ -17,6 +17,57 @@ The web interface will be available at `http://localhost:5000`
 
 **📸 Screenshot needed:** *Main application startup screen*
 
+### 2. Remote Server Access (SSH Tunneling)
+
+If you're running ChemStructLLM on a remote server or cluster node, you'll need to set up SSH tunneling to access the web interface from your local machine.
+
+#### Setting Up SSH Tunnel
+
+1. **Basic SSH Tunnel Setup**
+   ```bash
+   ssh -L 5000:localhost:5000 username@remote-server.domain.com
+   ```
+
+2. **Custom Port Tunneling** (if port 5000 is occupied)
+   ```bash
+   # Tunnel remote port 5000 to local port 5001
+   ssh -L 5001:localhost:5000 username@remote-server.domain.com
+   
+   # Then access via: http://localhost:5001
+   ```
+
+3. **Example for Cluster Access**
+   ```bash
+   # Replace with your actual username and server
+   ssh -L 5001:localhost:5000 your_username@cluster-node-name
+   ```
+
+#### After SSH Tunnel is Established
+
+1. **On the remote server**, start the application:
+   ```bash
+   python app.py
+   # Application runs on remote localhost:5000
+   ```
+
+2. **On your local machine**, open your browser and navigate to:
+   - `http://localhost:5000` (if using direct port mapping)
+   - `http://localhost:5001` (if using custom port mapping)
+
+#### Troubleshooting SSH Tunneling
+
+- **Port already in use**: Try a different local port (e.g., 5001, 5002)
+- **Connection refused**: Ensure the application is running on the remote server
+- **Tunnel drops**: Add `-o ServerAliveInterval=60` to keep connection alive
+  ```bash
+  ssh -L 5001:localhost:5000 -o ServerAliveInterval=60 username@server
+  ```
+
+**📸 Screenshots needed:**
+- *SSH tunnel command in terminal*
+- *Application running on remote server*
+- *Local browser accessing tunneled application*
+
 ---
 
 ## Core Features
@@ -28,7 +79,7 @@ The web interface will be available at `http://localhost:5000`
 1. **Choose Your Data File**
    - Click the file upload area or drag and drop your CSV file
    - Supported format: CSV files containing experimental NMR data
-   - Required columns: `SMILES`, `1H_NMR`, `13C_NMR`, `HSQC`, `COSY`
+   - Required columns: `SMILES`, `Sample_ID`, `1H_NMR`, `13C_NMR`, `HSQC`, `COSY`
 
 2. **File Processing**
    - The system automatically parses your CSV data
@@ -44,9 +95,19 @@ The web interface will be available at `http://localhost:5000`
 
 Your CSV file should contain:
 ```csv
-SMILES,1H_NMR,13C_NMR,HSQC,COSY
-Cc1ccc(NC(C(=O)O)c2ccc3c(c2)OCO3)cc1,[experimental_1H_data],[experimental_13C_data],[experimental_HSQC_data],[experimental_COSY_data]
+SMILES,Sample_ID,1H_NMR,13C_NMR,HSQC,COSY
+"Cc1ccc(NC(C(=O)O)c2ccc3c(c2)OCO3)cc1","SAMPLE002","[(2.2513137, 3), (5.049414, 1), (5.968915, 2), (6.631792, 0.5), ...]","[19.225267, 58.290585, 59.04912, 64.90056, 104.40221, ...]","[[2.2513137, 19.225267], [5.049414, 59.04912], [5.968915, 104.40221], ...]","[(2.2513137, 2.2513137), (5.049414, 5.049414), (6.651792, 6.6657114), ...]"
 ```
+
+**Data Format Explanation:**
+- **1H NMR**: `[(chemical_shift, intensity), (chemical_shift, intensity), ...]`
+  - Example: `[(2.2513137, 3), (5.049414, 1)]` = peak at 2.25 ppm with intensity 3
+- **13C NMR**: `[chemical_shift, chemical_shift, chemical_shift, ...]`
+  - Example: `[19.225267, 58.290585, 59.04912]` = carbon peaks at these chemical shifts
+- **HSQC**: `[[1H_shift, 13C_shift], [1H_shift, 13C_shift], ...]`
+  - Example: `[[2.2513137, 19.225267], [5.049414, 59.04912]]` = correlations between 1H and 13C
+- **COSY**: `[(1H_shift1, 1H_shift2), (1H_shift1, 1H_shift2), ...]`
+  - Example: `[(2.2513137, 2.2513137), (6.651792, 6.6657114)]` = proton-proton correlations
 
 ---
 
