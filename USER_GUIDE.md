@@ -74,8 +74,12 @@ If you're running ChemStructLLM on a remote server or cluster node, you'll need 
 
 #### Uploading Experimental Data
 
+![Main Interface](images/screenshots/screenshot_1.png)
+*Main interface showing file upload area, chat panel, and key control buttons*
+
 1. **Choose Your Data File**
-   - Click the file upload area or drag and drop your CSV file
+   - Click the **"Choose File"** or **"Upload File"** buttons in the File Input panel
+   - Drag and drop your CSV file into the upload area
    - Supported format: CSV files containing experimental NMR data
    - Required columns: `SMILES`, `Sample_ID`, `1H_NMR`, `13C_NMR`, `HSQC`, `COSY`
 
@@ -83,11 +87,14 @@ If you're running ChemStructLLM on a remote server or cluster node, you'll need 
    - The system automatically parses your CSV data
    - Molecular structures are generated from SMILES strings
    - NMR data is stored and linked to each molecule
+   - Success message shows "Successfully processed X molecules"
 
-**📸 Screenshots needed:**
-- *File upload interface*
-- *Example CSV file format*
-- *Successful upload confirmation*
+**Key Interface Elements:**
+- **LLM Model Selection**: Choose your AI model (Gemini 1.5 Flash shown)
+- **Clear Chat**: Press to clear the chat output
+- **Run Structure Elucidation**: Start the main workflow
+- **File Input Panel**: Upload your experimental data
+- **Chat Interface**: Text input and voice dictation
 
 #### Supported Data Format
 
@@ -124,25 +131,29 @@ SMILES,Sample_ID,1H_NMR,13C_NMR,HSQC,COSY
 2. **Send Messages**
    - Click the "Send" button or press Enter
    - The AI will process your request and provide responses
+   - Chat history shows processing steps and results
 
-**📸 Screenshots needed:**
-- *Chat interface with example queries*
-- *AI responses with molecular information*
+![Interface with Results](images/screenshots/screenshot_2.png)
+*Interface showing molecular visualization, NMR data analysis, and text-to-speech functionality*
 
 #### Voice Interaction
 
 1. **Voice Input**
-   - Click the microphone button 🎤
+   - Click the **"Dictate"** button in the chat input area
    - Speak your question clearly
    - The system will convert speech to text automatically
 
-2. **Voice Output**
-   - The AI can read responses aloud
-   - Toggle audio output in the interface settings
+2. **Voice Output (Text to Speech)**
+   - Click the **"Text to Speech"** button to have AI responses read aloud
+   - Useful for hands-free operation during analysis
+   - Toggle audio output as needed
 
-**📸 Screenshots needed:**
-- *Microphone button and voice input interface*
-- *Voice-to-text conversion in action*
+**Key Features Shown:**
+- **2D Molecular Structure**: Chemical structure visualization
+- **3D Molecular Structure**: Interactive 3D molecular models
+- **NMR Data Visualization**: Real-time spectral data plotting
+- **Chat Processing**: Step-by-step workflow execution
+- **SMILES Display**: Molecular formula and weight information
 
 ---
 
@@ -287,28 +298,47 @@ The generated JSON file contains:
    - `nmr_interpretation.ipynb`: Advanced NMR analysis
    - `confidence_evaluation.ipynb`: Result validation
 
-**📸 Screenshots needed:**
-- *Generated JSON file structure*
-- *Jupyter notebook with loaded results*
-- *Custom analysis plots*
-
 ---
 
 ### 8. Customizing the Workflow
 
 #### Workflow Configuration Options
 
-1. **Agent Configuration**
+1. **Workflow Step Definitions**
+   - **File**: `LLM_Structure_Elucidator/agents/orchestrator/workflow_definitions.py`
+   - Define custom workflow steps and their execution order
+   - Modify analysis pipeline components
+   - Set step dependencies and requirements
+
+   ```python
+   # Example workflow step definition
+   WORKFLOW_STEPS = {
+       'threshold_calculation': WorkflowStep(
+           keyword='threshold_calculation',
+           command='Calculate dynamic thresholds for spectral data analysis',
+           description='Calculate spectral analysis thresholds',
+           requires=[]
+       ),
+       'retrosynthesis': WorkflowStep(
+           keyword='retrosynthesis', 
+           command='Run retrosynthesis analysis on target structure',
+           description='Perform retrosynthesis analysis',
+           requires=[]
+       )
+   }
+   ```
+
+2. **Agent Configuration**
    - Located in `config/agent_config.json`
    - Modify AI model assignments for different tasks
    - Adjust analysis parameters
 
-2. **NMR Processing Settings**
+3. **NMR Processing Settings**
    - Configure peak picking algorithms
    - Adjust integration parameters
    - Set noise filtering options
 
-3. **Structure Generation Options**
+4. **Structure Generation Options**
    - Modify structure prediction algorithms
    - Set confidence thresholds
    - Configure output formats
