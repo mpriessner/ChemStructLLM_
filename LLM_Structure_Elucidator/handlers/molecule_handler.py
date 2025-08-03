@@ -157,8 +157,8 @@ def get_nmr_data_from_json(smiles: str):
             if molecule.get('smiles') == smiles:
                 print(f"[Molecule Handler] Found NMR data for SMILES: {smiles} (sample-id: {sample_id})")
                 
-                # Get NMR data and keep original keys
-                nmr_data = molecule.get('nmr_data', {})
+                # Get NMR data from the correct nested structure
+                nmr_data = molecule.get('molecule_data', {}).get('nmr_data', {})
                 result = {
                     'sample_id': sample_id,
                     '1H_exp': nmr_data.get('1H_exp'),
