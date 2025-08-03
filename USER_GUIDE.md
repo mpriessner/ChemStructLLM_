@@ -46,7 +46,8 @@ If you're running ChemStructLLM on a remote server or cluster node, you'll need 
 
 1. **On the remote server**, start the application:
    ```bash
-   python app.py
+   cd LLM_Structure_Elucidator
+   python run.py
    # Application runs on remote localhost:5000
    ```
 
@@ -63,10 +64,7 @@ If you're running ChemStructLLM on a remote server or cluster node, you'll need 
   ssh -L 5001:localhost:5000 -o ServerAliveInterval=60 username@server
   ```
 
-**📸 Screenshots needed:**
-- *SSH tunnel command in terminal*
-- *Application running on remote server*
-- *Local browser accessing tunneled application*
+
 
 ---
 
