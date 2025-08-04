@@ -502,62 +502,161 @@ ChemStructLLM/
 
 ---
 
-## Interface Features
+## Complete Workflow Example
 
-### Chat Management
+This section provides a step-by-step example of how to use ChemStructLLM from start to finish.
 
-1. **Clear Chat History**
-   - Reset conversation for new analysis
-   - Maintains uploaded data and current molecule selection
+### Step 1: System Testing
 
-2. **Export Conversations**
+**Before starting your analysis, verify the system is working correctly:**
+
+1. **Run the test script**:
+   ```bash
+   cd LLM_Structure_Elucidator
+   python run.py
+   ```
+
+2. **Check for errors**:
+   - Monitor the console output for any error messages
+   - Ensure all dependencies are properly installed
+   - Verify that the web interface loads successfully
+
+3. **Test basic functionality**:
+   - Open the web interface in your browser
+   - Try a simple chat interaction
+   - Verify that all interface elements are responsive
+
+### Step 2: Data Upload
+
+**Upload your experimental data:**
+
+1. **Prepare your CSV file** with the correct format:
+   ```csv
+   SMILES,1H_NMR,13C_NMR,HSQC,COSY
+   CCO,"[(3.7, 2), (1.2, 3), ...]","[63.2, 18.1, ...]","[[3.7, 63.2], [1.2, 18.1], ...]","[(3.7, 1.2), ...]"
+   ```
+
+2. **Upload the file**:
+   - Click "Choose File" button
+   - Select your prepared CSV file
+   - Wait for upload confirmation
+   - Verify the data appears in the interface
+
+### Step 3: Molecule Exploration
+
+**Explore your uploaded molecules interactively:**
+
+1. **View specific molecules**:
+   ```
+   Chat: "show me molecule 1"
+   Chat: "show me molecule 2"
+   Chat: "display molecule 5"
+   ```
+
+2. **Get molecular information**:
+   ```
+   Chat: "what is the molecular formula of molecule 1?"
+   Chat: "show me the 2D structure of molecule 3"
+   Chat: "display the 3D model for molecule 2"
+   ```
+
+3. **Navigate between molecules**:
+   ```
+   Chat: "switch to molecule 4"
+   Chat: "compare molecule 1 and molecule 3"
+   ```
+
+### Step 4: NMR Data Investigation
+
+**Examine your experimental NMR data:**
+
+1. **Display different NMR types**:
+   ```
+   Chat: "show me the 1H NMR"
+   Chat: "display the 13C NMR spectrum"
+   Chat: "show HSQC for this molecule"
+   Chat: "plot the COSY spectrum"
+   ```
+
+2. **Analyze specific features**:
+   ```
+   Chat: "what peaks do you see in the 1H NMR?"
+   Chat: "explain the HSQC correlations"
+   Chat: "identify the coupling patterns in COSY"
+   ```
+
+3. **Compare different spectra**:
+   ```
+   Chat: "show me all NMR data for molecule 2"
+   Chat: "compare the 1H and 13C data"
+   ```
+
+### Step 5: Structure Elucidation Workflow
+
+**When ready, run the comprehensive analysis:**
+
+1. **Initiate the workflow**:
+   ```
+   Chat: "run structure elucidation"
+   ```
+   - Click the green "Run Structure Elucidation" button
+   - The system will execute all enabled workflow steps
+   - Monitor progress in the chat interface
+
+2. **Workflow execution includes**:
+   - Retrosynthetic analysis
+   - Forward prediction modeling
+   - Mol2Mol structure generation
+   - MMST spectral analysis
+   - Comprehensive AI-driven analysis
+
+3. **Review results**:
+   - Results are saved to a new JSON file
+   - All analysis data is preserved
+   - Chat interface provides summary of findings
+
+### Step 6: Results Analysis
+
+**Examine the generated results:**
+
+1. **Check the output files**:
+   - New JSON file contains all analysis results
+   - Workflow logs show execution details
+   - Generated structures and predictions are saved
+
+2. **Interact with results**:
+   ```
+   Chat: "summarize the structure elucidation results"
+   Chat: "show me the predicted structures"
+   Chat: "explain the confidence scores"
+   ```
+
+3. **Export and document**:
    - Save chat history for documentation
-   - Include AI reasoning and analysis steps
+   - Export molecular structures
+   - Archive analysis results
 
-### Data Selection
+### Example Complete Session
 
-1. **Molecule Selection**
-   - Choose which uploaded molecule to analyze
-   - Switch between different samples easily
-   - Maintain context across different queries
+```
+1. Start system: python run.py
+2. Upload: my_compounds.csv
+3. Chat: "show me molecule 1"
+4. Chat: "display the 1H NMR"
+5. Chat: "show HSQC spectrum"
+6. Chat: "what do you think about the structure?"
+7. Chat: "run structure elucidation"
+8. Wait for analysis completion
+9. Chat: "summarize the results"
+10. Review generated JSON output
+```
 
-2. **Spectrum Selection**
-   - Choose which NMR data to display
-   - Compare different spectral types
-   - Overlay multiple spectra when relevant
-
-**📸 Screenshots needed:**
-- *Chat management controls*
-- *Data selection interface*
-- *Molecule switching demonstration*
-
----
-
-## Tips for Best Results
-
-### Data Preparation
-
-1. **CSV File Quality**
-   - Ensure SMILES strings are valid
-   - Include all available NMR data types
-   - Use consistent data formatting
-
-2. **NMR Data Format**
-   - Provide peak lists or full spectral data
-   - Include integration values when available
-   - Specify measurement conditions if relevant
-
-### Effective Querying
-
-1. **Specific Requests**
-   - Be specific about what you want to see
-   - Use standard NMR terminology
-   - Ask follow-up questions for clarification
-
-2. **Sequential Analysis**
-   - Start with basic molecular information
-   - Progress to specific spectral analysis
-   - Use structure elucidation as final step
+**Expected Outputs:**
+- Interactive molecular visualizations
+- Real experimental NMR plots
+- AI-generated structure predictions
+- Comprehensive analysis JSON file
+- Detailed reasoning and explanations
 
 ---
 
