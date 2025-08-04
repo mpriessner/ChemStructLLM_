@@ -552,19 +552,9 @@ This section provides a step-by-step example of how to use ChemStructLLM from st
    Chat: "show me molecule 2"
    Chat: "display molecule 5"
    ```
-
-2. **Get molecular information**:
-   ```
-   Chat: "what is the molecular formula of molecule 1?"
-   Chat: "show me the 2D structure of molecule 3"
-   Chat: "display the 3D model for molecule 2"
-   ```
-
-3. **Navigate between molecules**:
-   ```
-   Chat: "switch to molecule 4"
-   Chat: "compare molecule 1 and molecule 3"
-   ```
+   - This automatically updates both 2D and 3D visualizations
+   - Molecular information is displayed alongside the structure
+   - SMILES, molecular formula, and molecular weight are shown
 
 ### Step 4: NMR Data Investigation
 
@@ -577,28 +567,16 @@ This section provides a step-by-step example of how to use ChemStructLLM from st
    Chat: "show HSQC for this molecule"
    Chat: "plot the COSY spectrum"
    ```
-
-2. **Analyze specific features**:
-   ```
-   Chat: "what peaks do you see in the 1H NMR?"
-   Chat: "explain the HSQC correlations"
-   Chat: "identify the coupling patterns in COSY"
-   ```
-
-3. **Compare different spectra**:
-   ```
-   Chat: "show me all NMR data for molecule 2"
-   Chat: "compare the 1H and 13C data"
-   ```
+   - The system plots your actual experimental data
+   - Interactive plots with zoom and pan capabilities
+   - Real peak positions and intensities from your CSV file
 
 ### Step 5: Structure Elucidation Workflow
 
 **When ready, run the comprehensive analysis:**
 
 1. **Initiate the workflow**:
-   ```
-   Chat: "run structure elucidation"
-   ```
+   - Type: `"run structure elucidation"` in the chat, OR
    - Click the green "Run Structure Elucidation" button
    - The system will execute all enabled workflow steps
    - Monitor progress in the chat interface
@@ -610,31 +588,29 @@ This section provides a step-by-step example of how to use ChemStructLLM from st
    - MMST spectral analysis
    - Comprehensive AI-driven analysis
 
-3. **Review results**:
-   - Results are saved to a new JSON file
-   - All analysis data is preserved
-   - Chat interface provides summary of findings
+3. **Results storage**:
+   - All results are saved to a JSON file
+   - Located in: `data/molecular_data/` folder
+   - Contains all analysis data and predictions
 
-### Step 6: Results Analysis
+### Step 6: Results Storage
 
-**Examine the generated results:**
+**After workflow completion:**
 
-1. **Check the output files**:
-   - New JSON file contains all analysis results
-   - Workflow logs show execution details
-   - Generated structures and predictions are saved
+1. **Output location**:
+   - Results are automatically saved to a JSON file
+   - Located in: `data/molecular_data/` folder
+   - Contains all workflow analysis data and predictions
 
-2. **Interact with results**:
-   ```
-   Chat: "summarize the structure elucidation results"
-   Chat: "show me the predicted structures"
-   Chat: "explain the confidence scores"
-   ```
+2. **Current status**:
+   - Results analysis interface is **work in progress**
+   - JSON file contains all raw data for future development
+   - Can be extended for interactive results exploration
 
-3. **Export and document**:
-   - Save chat history for documentation
-   - Export molecular structures
-   - Archive analysis results
+3. **Manual review**:
+   - Open the JSON file to examine results
+   - Contains structure predictions, confidence scores, and analysis details
+   - Suitable for further processing or external analysis tools
 
 ### Example Complete Session
 
@@ -642,21 +618,22 @@ This section provides a step-by-step example of how to use ChemStructLLM from st
 1. Start system: python run.py
 2. Upload: my_compounds.csv
 3. Chat: "show me molecule 1"
+   → 2D/3D structures appear with molecular info
 4. Chat: "display the 1H NMR"
+   → Real experimental 1H spectrum plotted
 5. Chat: "show HSQC spectrum"
-6. Chat: "what do you think about the structure?"
-7. Chat: "run structure elucidation"
-8. Wait for analysis completion
-9. Chat: "summarize the results"
-10. Review generated JSON output
+   → Real experimental HSQC 2D plot displayed
+6. Chat: "run structure elucidation"
+   → Workflow executes all analysis steps
+7. Wait for analysis completion
+8. Check data/molecular_data/ for results JSON file
 ```
 
 **Expected Outputs:**
-- Interactive molecular visualizations
-- Real experimental NMR plots
-- AI-generated structure predictions
-- Comprehensive analysis JSON file
-- Detailed reasoning and explanations
+- Interactive 2D and 3D molecular visualizations
+- Real experimental NMR plots from your CSV data
+- Comprehensive analysis JSON file in `data/molecular_data/`
+- All workflow predictions and analysis results stored for future use
 
 ---
 
