@@ -413,6 +413,76 @@ WorkflowType.TARGET_ONLY: [
    - Set confidence thresholds
    - Configure output formats
 
+#### Script Configuration for Different Environments
+
+**⚠️ IMPORTANT**: Before running the structure elucidation workflow, you must configure the execution scripts for your specific environment.
+
+**Scripts Location**: `LLM_Structure_Elucidator/agents/scripts/`
+
+**Available Scripts:**
+- `chemformer_forward_sbatch.sh` / `chemformer_forward_local.sh`
+- `chemformer_retro_sbatch.sh` / `chemformer_retro_local.sh`
+- `mol2mol_sbatch.sh` / `mol2mol_local.sh`
+- `mmst_sbatch.sh` / `mmst_local.sh`
+- `sgnn_sbatch.sh` / `sgnn_local.sh`
+- `peak_matching_local.sh`
+
+**Required Modifications:**
+
+1. **Environment Path Configuration**
+   ```bash
+   # Example from chemformer_forward_sbatch.sh
+   # CHANGE THIS to your conda installation path:
+   eval "$(/projects/cc/se_users/knlr326/miniconda_SE/bin/conda shell.bash hook)"
+   
+   # Update to your path:
+   eval "$(/your/path/to/miniconda/bin/conda shell.bash hook)"
+   ```
+
+2. **Base Directory Paths**
+   ```bash
+   # Update these paths to match your installation:
+   BASE_DIR="/your/path/to/ChemStructLLM_/LLM_Structure_Elucidator"
+   CONFIG_BASE_DIR="/your/path/to/ChemStructLLM_"
+   ```
+
+3. **CUDA Module Loading** (for cluster environments)
+   ```bash
+   # Ensure correct CUDA version is loaded:
+   module load CUDA/11.3.1
+   # Or your cluster's CUDA module name
+   ```
+
+4. **Model and Vocabulary Paths**
+   ```bash
+   # Update model paths to your installation:
+   MODEL_PATH="$CONFIG_BASE_DIR/chemformer_public/models/fined-tuned/uspto_mixed/last_v2.ckpt"
+   VOCAB_PATH="$CONFIG_BASE_DIR/chemformer_public/bart_vocab_downstream.json"
+   ```
+
+5. **Execution Parameters** (customizable)
+   ```bash
+   # Adjust these based on your computational resources:
+   BATCH_SIZE=64        # Reduce if memory limited
+   N_BEAMS=10          # Increase for better results (slower)
+   N_UNIQUE_BEAMS=-1   # Set to positive number to limit unique outputs
+   ```
+
+**SLURM Configuration** (for cluster environments):
+```bash
+#SBATCH --partition=short-gpu    # Change to your partition
+#SBATCH --gres=gpu:1            # Adjust GPU requirements
+#SBATCH --mem=64g               # Adjust memory requirements
+#SBATCH --time=0-0:05:00        # Adjust time limits
+```
+
+**Steps to Configure:**
+1. Navigate to `LLM_Structure_Elucidator/agents/scripts/`
+2. Edit each `.sh` file you plan to use
+3. Update all paths to match your installation
+4. Modify SLURM parameters for your cluster (if applicable)
+5. Test scripts individually before running full workflow
+
 #### Customization Locations
 
 ```
@@ -422,14 +492,13 @@ ChemStructLLM/
 │   ├── nmr_config.json        # NMR processing parameters
 │   └── workflow_config.json   # Overall workflow settings
 ├── agents/
+│   ├── scripts/               # ⚠️ CONFIGURE THESE SCRIPTS
+│   │   ├── *.sh              # Environment-specific paths
+│   │   └── logs/             # Script execution logs
 │   └── specialized/           # Individual agent implementations
 └── workflows/
     └── elucidation/          # Structure elucidation workflows
 ```
-
-**📸 Screenshots needed:**
-- *Configuration file examples*
-- *Workflow customization interface*
 
 ---
 
