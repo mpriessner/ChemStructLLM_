@@ -328,6 +328,54 @@ The generated JSON file contains:
    }
    ```
 
+#### Customizing Workflow Sequences
+
+You can customize which analysis steps are executed by modifying the `WORKFLOW_SEQUENCES` in the same file:
+
+**Example - TARGET_ONLY Workflow:**
+```python
+WorkflowType.TARGET_ONLY: [
+    # WORKFLOW_STEPS['threshold_calculation'],    # Commented out - not executed
+    # WORKFLOW_STEPS['nmr_simulation'],           # Commented out - not executed  
+    # WORKFLOW_STEPS['peak_matching'],            # Commented out - not executed
+    WORKFLOW_STEPS['retrosynthesis'],             # Active - will be executed
+    WORKFLOW_STEPS['forward_prediction'],         # Active - will be executed
+    WORKFLOW_STEPS['forward_candidate_analysis'], # Active - will be executed
+    WORKFLOW_STEPS['mol2mol'],                    # Active - will be executed
+    WORKFLOW_STEPS['mol2mol_candidate_analysis'], # Active - will be executed
+    WORKFLOW_STEPS['mmst'],                       # Active - will be executed
+    WORKFLOW_STEPS['mmst_candidate_analysis'],    # Active - will be executed
+    WORKFLOW_STEPS['analysis']                    # Active - will be executed
+]
+```
+
+**To Enable/Disable Steps:**
+1. **Enable a step**: Remove the `#` at the beginning of the line
+   ```python
+   WORKFLOW_STEPS['threshold_calculation'],  # Now active
+   ```
+
+2. **Disable a step**: Add `#` at the beginning of the line
+   ```python
+   # WORKFLOW_STEPS['retrosynthesis'],  # Now disabled
+   ```
+
+**Available Analysis Steps:**
+- `threshold_calculation`: Calculate dynamic thresholds for spectral analysis
+- `nmr_simulation`: Simulate NMR spectra for comparison
+- `peak_matching`: Match experimental peaks with predicted spectra
+- `retrosynthesis`: Perform retrosynthetic analysis
+- `forward_prediction`: Generate structure candidates using forward prediction
+- `mol2mol`: Use Mol2Mol model for structure generation
+- `mmst`: Use MultiModal Spectral Transformer for predictions
+- `analysis`: Comprehensive LLM-driven analysis of results
+
+**Workflow Types:**
+- `TARGET_ONLY`: Analysis when you have a target structure
+- `STARTING_MATERIAL`: Analysis starting from known materials
+- `MULTIPLE_TARGETS`: Analysis with multiple target candidates
+- `SPECTRAL_ONLY`: Analysis using only spectral data
+
 2. **Agent Configuration**
    - Located in `config/agent_config.json`
    - Modify AI model assignments for different tasks
