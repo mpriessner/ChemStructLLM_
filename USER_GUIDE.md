@@ -161,6 +161,9 @@ SMILES,Sample_ID,1H_NMR,13C_NMR,HSQC,COSY
 
 #### Choosing Your AI Model
 
+![AI Model Selection](images/screenshots/screenshot_3.png)
+*AI model dropdown showing available models for chat interface interaction*
+
 1. **Model Options**
    - Multiple AI models available (GPT, Claude, Gemini, etc.)
    - Each model has different strengths for chemical analysis
@@ -168,12 +171,15 @@ SMILES,Sample_ID,1H_NMR,13C_NMR,HSQC,COSY
 
 2. **Model Selection**
    - Use the model dropdown in the chat interface
-   - Changes take effect for subsequent queries
+   - **Important**: This selection only affects chat interactions and interface responses
+   - Background analysis workflows use pre-configured models
+   - Changes take effect for subsequent chat queries
    - Previous conversation history is maintained
 
-**📸 Screenshots needed:**
-- *Model selection dropdown*
-- *Different model responses comparison*
+**Chat vs Background Processing:**
+- **Chat Interface**: Uses your selected model for answering questions and providing explanations
+- **Structure Elucidation Workflow**: Uses specialized models optimized for each analysis step
+- **NMR Analysis**: Uses dedicated models trained on spectroscopic data
 
 ---
 
@@ -203,10 +209,20 @@ SMILES,Sample_ID,1H_NMR,13C_NMR,HSQC,COSY
    - Peak identification
    - Integration values (where applicable)
 
-**📸 Screenshots needed:**
-- *1H NMR spectrum display*
-- *HSQC 2D plot*
-- *Interactive plot controls*
+![NMR Spectra Visualization](images/screenshots/screenshot_4.png)
+*Complete NMR visualization suite showing 1H, 13C, HSQC, and COSY spectra from experimental data*
+
+**Available NMR Plot Types:**
+- **1H NMR**: Proton spectrum with chemical shifts and peak intensities
+- **13C NMR**: Carbon spectrum showing all carbon environments
+- **HSQC**: 2D correlation between 1H and 13C nuclei
+- **COSY**: 2D correlation showing proton-proton coupling
+
+**Interactive Features:**
+- Real-time plotting of experimental data
+- Zoom and pan functionality
+- Peak picking and integration
+- Export capabilities for further analysis
 
 ---
 
@@ -230,10 +246,16 @@ SMILES,Sample_ID,1H_NMR,13C_NMR,HSQC,COSY
    - Rotate, zoom, and explore molecular geometry
    - Useful for understanding stereochemistry
 
-**📸 Screenshots needed:**
-- *2D molecular structure display*
-- *3D molecular model interface*
-- *Multiple molecule comparison view*
+![Molecular Visualization](images/screenshots/screenshot_5.png)
+*2D and 3D molecular visualization showing chemical structure and interactive 3D model*
+
+**Visualization Features:**
+- **2D Structure**: High-quality chemical structure drawings with proper bond representation
+- **3D Model**: Interactive molecular geometry with realistic atomic positions
+- **SMILES Information**: Molecular formula and molecular weight display
+- **Rotation Controls**: Mouse-driven 3D model manipulation
+- **Zoom Functionality**: Detailed examination of molecular features
+- **Stereochemistry**: Clear visualization of spatial arrangements
 
 ---
 
