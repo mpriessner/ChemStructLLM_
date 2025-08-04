@@ -190,7 +190,22 @@ export CUDA_VISIBLE_DEVICES=0  # GPU selection
 
 ## Usage
 
-For detailed usage instructions, please refer to the Jupyter notebooks provided in the examples directory. These notebooks contain step-by-step experimental procedures and demonstrations of the framework's capabilities.
+### Interactive Web Interface
+
+For comprehensive instructions on using the interactive web interface and running structure elucidation workflows, see:
+
+**📖 [USER_GUIDE.md](USER_GUIDE.md)** - Complete guide covering:
+- System setup and configuration
+- Data upload and format requirements
+- Interactive molecule exploration
+- NMR data visualization
+- Structure elucidation workflow execution
+- Script configuration for different environments
+- End-to-end workflow examples
+
+### Data Analysis and Visualization
+
+For analysis and visualization of workflow results, please refer to the Jupyter notebooks provided in the examples directory. These notebooks contain data visualization tools and analysis of completed structure elucidation workflows.
 
 ## Datasets and Code
 
