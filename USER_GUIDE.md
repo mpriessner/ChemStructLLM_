@@ -64,7 +64,56 @@ If you're running ChemStructLLM on a remote server or cluster node, you'll need 
   ssh -L 5001:localhost:5000 -o ServerAliveInterval=60 username@server
   ```
 
+## API Key Configuration
 
+Before using the system, you need to configure API keys for the AI models you want to use.
+
+### Setting Up API Keys
+
+1. **Navigate to the config directory**:
+   ```bash
+   cd LLM_Structure_Elucidator/config/
+   ```
+
+2. **Copy the template file**:
+   ```bash
+   cp config.template.py config.py
+   ```
+
+3. **Edit the configuration file**:
+   ```bash
+   # Open config.py in your preferred editor
+   nano config.py  # or vim, code, etc.
+   ```
+
+4. **Replace placeholder values** with your actual API keys:
+   ```python
+   # Anthropic API key (for Claude models)
+   anthropic_api_key = "sk-ant-api03-your-actual-key-here"
+   
+   # OpenAI API key (for GPT models)
+   openai_api_key = "sk-your-actual-openai-key-here"
+   
+   # Google Gemini API key
+   gemini_api_key = "your-actual-gemini-key-here"
+   
+   # DeepSeek API keys
+   deepseek_api_key = "your-actual-deepseek-key-here"
+   deepseek_azure_api_key = "your-azure-deepseek-key-here"
+   
+   # Kimi API key
+   kimi_api_key = "your-actual-kimi-key-here"
+   
+   # ElevenLabs API key (for text-to-speech features)
+   elevenlabs_key = "your-actual-elevenlabs-key-here"
+   ```
+
+### Important Notes
+
+- **Required**: You only need to configure API keys for the models you plan to use
+- **Security**: Never commit the `config.py` file to version control (it's in `.gitignore`)
+- **Model Selection**: The chat interface allows you to switch between different AI models
+- **Fallback**: If no API key is configured for a model, it won't be available in the interface
 
 ---
 

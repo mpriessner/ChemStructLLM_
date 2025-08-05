@@ -188,6 +188,29 @@ export WANDB_DIR="./wandb"  # For experiment tracking
 export CUDA_VISIBLE_DEVICES=0  # GPU selection
 ```
 
+### API Key Configuration
+
+The system supports multiple AI models for chat and analysis. Configure API keys as follows:
+
+1. **Copy the template file**:
+   ```bash
+   cp LLM_Structure_Elucidator/config/config.template.py LLM_Structure_Elucidator/config/config.py
+   ```
+
+2. **Edit the config file** and replace placeholder values with your actual API keys:
+   ```python
+   # Available API keys to configure:
+   anthropic_api_key = "your-anthropic-api-key-here"     # Claude models
+   openai_api_key = "your-openai-api-key-here"           # GPT models
+   gemini_api_key = "your-google-api-key-here"           # Gemini models
+   deepseek_api_key = "your-deepseek-api-key-here"       # DeepSeek models
+   deepseek_azure_api_key = "your-deepseek-azure-api-key-here"
+   kimi_api_key = "your-kimi-api-key-here"               # Kimi models
+   elevenlabs_key = "your-elevenlabs-api-key-here"       # Text-to-speech
+   ```
+
+3. **Note**: You only need to configure the API keys for the models you plan to use.
+
 ## Usage
 
 ### Interactive Web Interface
