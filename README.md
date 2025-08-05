@@ -211,6 +211,62 @@ The system supports multiple AI models for chat and analysis. Configure API keys
 
 3. **Note**: You only need to configure the API keys for the models you plan to use.
 
+## Data and Model Setup from Zenodo
+
+The complete dataset and pre-trained models are available on Zenodo:
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15422441.svg)](https://zenodo.org/records/15422441)
+
+### Download Required Files
+
+Download the following archives from the Zenodo repository:
+- `models.zip` - Pre-trained models (Chemformer, MMST, Mol2Mol)
+- `data_molecular_structure.zip` - Example molecular data and test cases
+- `intermediate_results_selected.zip` - Pre-computed workflow results for analysis
+
+### Extract Files to Correct Locations
+
+1. **Extract models**:
+   ```bash
+   cd ChemStructLLM_
+   unzip models.zip
+   # This creates: models/chemformer/, models/mmst/, models/mol2mol/
+   ```
+
+2. **Extract molecular data**:
+   ```bash
+   cd LLM_Structure_Elucidator
+   unzip data_molecular_structure.zip
+   # This creates: data/molecular_data/ with example files
+   ```
+
+3. **Extract workflow results** (for Jupyter notebook analysis):
+   ```bash
+   cd LLM_Structure_Elucidator
+   unzip intermediate_results_selected.zip
+   # This creates: _temp_folder/intermediate_results/ with example runs
+   ```
+
+### Verify Installation
+
+After extraction, your directory structure should include:
+```
+ChemStructLLM_/
+├── models/
+│   ├── chemformer/
+│   ├── mmst/base_models/
+│   └── mol2mol/Alessandro_big/
+└── LLM_Structure_Elucidator/
+    ├── data/molecular_data/
+    │   ├── molecular_data.json
+    │   └── archive/
+    └── _temp_folder/intermediate_results/
+        ├── _run_1_sim_finished/
+        ├── _run_2_sim_aug_finished/
+        └── ... (additional run folders)
+```
+
+**Note**: These files are essential for reproducing the experimental results and running the complete workflow analysis.
+
 ## Usage
 
 ### Interactive Web Interface
