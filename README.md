@@ -222,6 +222,7 @@ Download the following archives from the Zenodo repository:
 - `models.zip` - Pre-trained models (Chemformer, MMST, Mol2Mol)
 - `data_molecular_structure.zip` - Example molecular data and test cases
 - `intermediate_results_selected.zip` - Pre-computed workflow results for analysis
+- `data_exp.zip` - Experimental data for analysis and testing Jupyter notebooks
 
 ### Extract Files to Correct Locations
 
@@ -246,11 +247,21 @@ Download the following archives from the Zenodo repository:
    # This creates: _temp_folder/intermediate_results/ with example runs
    ```
 
+4. **Extract experimental data** (for Jupyter notebook analysis):
+   ```bash
+   cd ChemStructLLM_
+   unzip data_exp.zip
+   # This creates: data_exp/ with experimental datasets used by analysis notebooks
+   ```
+
 ### Verify Installation
 
 After extraction, your directory structure should include:
 ```
 ChemStructLLM_/
+├── data_exp/                          # Experimental data for Jupyter notebooks
+│   ├── experimental_datasets/
+│   └── ... (analysis data files)
 ├── models/
 │   ├── chemformer/
 │   ├── mmst/base_models/
@@ -265,7 +276,7 @@ ChemStructLLM_/
         └── ... (additional run folders)
 ```
 
-**Note**: These files are essential for reproducing the experimental results and running the complete workflow analysis.
+**Note**: These files are essential for reproducing the experimental results and running the complete workflow analysis. The `data_exp` folder contains experimental datasets that are specifically required by the data analysis and testing Jupyter notebooks.
 
 ## Usage
 
