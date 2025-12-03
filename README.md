@@ -35,7 +35,7 @@ Before installation, ensure you have:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/ChemStructLLM_.git
+git clone https://github.com/mpriessner/ChemStructLLM_.git
 cd ChemStructLLM_
 ```
 
@@ -60,51 +60,32 @@ Different analysis tools require specialized environments with specific dependen
 
 For MultiModalSpectralTransformer, SGNN, and Mol2Mol analysis.
 
-**Automated Installation (Recommended):**
+**Step 1: Create the Environment**
 
 ```bash
-# Run the installation script
+# Create environment with Python 3.7.6
+conda create -y -c conda-forge -n NMR_Structure_Elucidator python=3.7.6
+
+# Activate the environment
+conda activate NMR_Structure_Elucidator
+```
+
+**Step 2: Install Dependencies (Automated)**
+
+```bash
+# Run the installation script (make sure environment is activated!)
 bash installs.sh
 ```
 
-This script will:
-- Create a Python 3.7.6 conda environment
-- Install PyTorch 1.9.1 with CUDA 11.1 support
-- Install all required dependencies including:
-  - DGL (Deep Graph Library) for graph neural networks
-  - RDKit for molecular analysis
-  - PyTorch Lightning 0.7.3
-  - Jupyter and visualization packages
-  - Chemistry-specific tools (MolVS, dgllife, CairoSVG)
+This script will install:
+- PyTorch 1.9.1 with CUDA 11.1 support
+- DGL (Deep Graph Library) for graph neural networks
+- RDKit for molecular analysis
+- PyTorch Lightning 0.7.3
+- Jupyter and visualization packages
+- Chemistry-specific tools (MolVS, dgllife, CairoSVG)
+- Flask and web dependencies
 
-**Manual Installation (Alternative):**
-
-If you prefer manual installation or need to customize:
-
-```bash
-# Create environment
-conda create -y -c conda-forge -n NMR_Structure_Elucidator python=3.7.6
-conda activate NMR_Structure_Elucidator
-
-# Install PyTorch with CUDA 11.1
-pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
-
-# Install core dependencies
-pip install pytorch-lightning==0.7.3
-pip install dgl-cu111==0.6.1
-pip install rdkit==2023.3.2
-pip install dgllife==0.3.0
-pip install MolVS==0.1.1
-pip install transformers==4.26.1
-
-# Install additional packages
-pip install pandas==1.3.5 matplotlib==3.5.3 plotly==5.18.0
-pip install Flask==2.2.5 Flask-SocketIO==5.3.6
-pip install wandb==0.15.4 tensorboardX==2.6.2.2
-pip install umap-learn==0.5.4 CairoSVG==2.7.0
-
-# See installs.sh for complete list of dependencies
-```
 
 **Important Notes:**
 - This environment uses **Python 3.7.6** (not 3.9) for compatibility with pre-trained MMST models

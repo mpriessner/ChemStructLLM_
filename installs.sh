@@ -1,31 +1,26 @@
 #!/bin/bash
 
 echo "========================================="
-echo "Installing NMR_Structure_Elucidator Environment"
+echo "Installing packages for NMR_Structure_Elucidator"
 echo "========================================="
+echo ""
+echo "IMPORTANT: Make sure you have activated the environment first:"
+echo "    conda activate NMR_Structure_Elucidator"
+echo ""
 
-# Remove existing environment if it exists
-echo "Removing existing environment (if any)..."
-conda env remove -n NMR_Structure_Elucidator -y 2>/dev/null
-
-# Create new environment
-echo "Creating conda environment with Python 3.7.6..."
-conda create -y -c conda-forge -n NMR_Structure_Elucidator python=3.7.6
-
-# Check if environment was created successfully
-if [ $? -ne 0 ]; then
-    echo "ERROR: Failed to create conda environment"
+# Check if correct environment is activated
+if [[ "$CONDA_DEFAULT_ENV" != "NMR_Structure_Elucidator" ]]; then
+    echo "ERROR: NMR_Structure_Elucidator environment is not activated!"
+    echo "Please run: conda activate NMR_Structure_Elucidator"
     exit 1
 fi
 
-echo "Environment created successfully!"
+echo "✓ Environment verified: $CONDA_DEFAULT_ENV"
 echo ""
 echo "========================================="
 echo "Installing Jupyter packages..."
 echo "========================================="
 
-# Note: The following commands will run in the activated environment
-# We'll activate it in the shell that runs this script
 pip install jupyter-client==7.0.6
 pip install jupyter_core==4.11.1
 pip install jupyter-server==1.23.4
