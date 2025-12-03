@@ -25,7 +25,21 @@ This integrated approach significantly improves structure elucidation accuracy, 
 
 ## Installation and Environment Setup
 
-### Base Environment (LLM Structure Elucidator)
+### Prerequisites
+
+Before installation, ensure you have:
+- Conda or Miniconda installed
+- Git installed
+- CUDA 11.1 compatible GPU (for MMST/SGNN/Mol2Mol tools)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/ChemStructLLM_.git
+cd ChemStructLLM_
+```
+
+### 2. Base Environment (LLM Structure Elucidator)
 
 The main LLM Structure Elucidator requires a base Python environment with the following packages:
 
@@ -38,30 +52,65 @@ conda activate LLM_312
 pip install -r requirements.txt
 ```
 
-### Specialized Tool Environments
+### 3. Specialized Tool Environments
 
 Different analysis tools require specialized environments with specific dependencies:
 
-#### 1. MMST Environment (`NMR_Structure_Elucidator`)
+#### MMST Environment (`NMR_Structure_Elucidator`)
 
-For MultiModalSpectralTransformer and Mol2Mol analysis:
+For MultiModalSpectralTransformer, SGNN, and Mol2Mol analysis.
+
+**Automated Installation (Recommended):**
 
 ```bash
-# Create MMST environment
-conda create -n NMR_Structure_Elucidator python=3.9
+# Run the installation script
+bash installs.sh
+```
+
+This script will:
+- Create a Python 3.7.6 conda environment
+- Install PyTorch 1.9.1 with CUDA 11.1 support
+- Install all required dependencies including:
+  - DGL (Deep Graph Library) for graph neural networks
+  - RDKit for molecular analysis
+  - PyTorch Lightning 0.7.3
+  - Jupyter and visualization packages
+  - Chemistry-specific tools (MolVS, dgllife, CairoSVG)
+
+**Manual Installation (Alternative):**
+
+If you prefer manual installation or need to customize:
+
+```bash
+# Create environment
+conda create -y -c conda-forge -n NMR_Structure_Elucidator python=3.7.6
 conda activate NMR_Structure_Elucidator
 
-# Install PyTorch with CUDA support
-conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+# Install PyTorch with CUDA 11.1
+pip install torch==1.9.1+cu111 torchvision==0.10.1+cu111 torchaudio==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
 
-# Install additional dependencies
-pip install pytorch-lightning==2.4.0
-pip install rdkit==2023.9.5
-pip install pandas numpy matplotlib scipy
-pip install transformers==4.35.2
-pip install tensorboard wandb
-pip install dgl  # For graph neural networks
+# Install core dependencies
+pip install pytorch-lightning==0.7.3
+pip install dgl-cu111==0.6.1
+pip install rdkit==2023.3.2
+pip install dgllife==0.3.0
+pip install MolVS==0.1.1
+pip install transformers==4.26.1
+
+# Install additional packages
+pip install pandas==1.3.5 matplotlib==3.5.3 plotly==5.18.0
+pip install Flask==2.2.5 Flask-SocketIO==5.3.6
+pip install wandb==0.15.4 tensorboardX==2.6.2.2
+pip install umap-learn==0.5.4 CairoSVG==2.7.0
+
+# See installs.sh for complete list of dependencies
 ```
+
+**Important Notes:**
+- This environment uses **Python 3.7.6** (not 3.9) for compatibility with pre-trained MMST models
+- PyTorch version is **1.9.1+cu111** (CUDA 11.1) - do not upgrade
+- PyTorch Lightning version is **0.7.3** (not 2.4.0) - required for model compatibility
+- These specific versions are necessary for the pre-trained models to work correctly
 
 #### 2. Chemformer Environment (`chemformer`)
 
@@ -86,17 +135,73 @@ pip install -e .
 export LD_LIBRARY_PATH=/path/to/your/conda/envs/chemformer/lib
 ```
 
-#### 3. SGNN Environment
+#### 3. SGNN and Mol2Mol
 
-For Spectral Graph Neural Networks and Mol2Mol analysis:
+**No separate installation needed!** 
+
+SGNN (Spectral Graph Neural Network) and Mol2Mol tools use the same `NMR_Structure_Elucidator` environment created above.
 
 ```bash
-# No separate installation needed - SGNN and mol2mol run natively with MMST installation
-# Use the NMR_Structure_Elucidator environment created above
+# Simply activate the MMST environment
 conda activate NMR_Structure_Elucidator
 ```
 
-**Note:** SGNN and mol2mol tools are included in the MMST installation and don't require separate environment setup.
+All dependencies for SGNN and Mol2Mol are already installed by `installs.sh`.
+
+### Troubleshooting Installation
+
+#### CUDA Version Issues
+
+The MMST environment requires CUDA 11.1. If you have a different CUDA version:
+
+**For CPU-only (no GPU):**
+```bash
+# Replace the PyTorch installation in installs.sh with:
+pip install torch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1
+pip install dgl==0.6.1  # CPU version
+```
+
+**For different CUDA versions:**
+- CUDA 11.1 is recommended for compatibility with pre-trained models
+- Using different CUDA versions may cause model loading issues
+
+#### DGL Installation Fails
+
+If `dgl-cu111==0.6.1` installation fails:
+- Ensure you're using Python 3.7.6 exactly
+- Verify CUDA 11.1 is installed on your system
+- For CPU-only, use `dgl==0.6.1` instead
+
+#### Script Fails on macOS
+
+macOS users should use CPU-only versions:
+- Follow the CPU-only PyTorch installation above
+- Some CUDA packages are Linux-only
+
+#### Verify Installation
+
+After installation, verify everything works:
+
+```bash
+conda activate NMR_Structure_Elucidator
+
+python -c "
+import torch
+print(f'PyTorch: {torch.__version__}')
+print(f'CUDA available: {torch.cuda.is_available()}')
+
+import dgl
+print(f'DGL: {dgl.__version__}')
+
+import rdkit
+print(f'RDKit: {rdkit.__version__}')
+
+import pytorch_lightning as pl
+print(f'PyTorch Lightning: {pl.__version__}')
+
+print('✅ All packages imported successfully!')
+"
+```
 
 ### Directory Structure Setup
 
