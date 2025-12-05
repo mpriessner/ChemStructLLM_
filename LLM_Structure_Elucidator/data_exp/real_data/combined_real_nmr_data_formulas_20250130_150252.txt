@@ -1,0 +1,40 @@
+Molecular Formulas Analysis for combined_real_nmr_data.csv
+================================================================================
+Generated on: 2025-01-30 15:02:52
+
+SMILES | Molecular Formula
+--------------------------------------------------------------------------------
+CCN(CC)CCOC(=O)c1ccc(N)cc1 | C13H20N2O2
+O=C(O)CCc1nc(-c2ccccc2)c(-c2ccccc2)o1 | C18H15NO3
+COc1cc(N[C@@H](C)CCCN)c2ncccc2c1 | C15H21N3O
+CN1CCN(CC(=O)N2c3ccccc3C(=O)Nc3cccnc32)CC1 | C19H21N5O2
+O=C(O)c1ccccc1Nc1ccccc1 | C13H11NO2
+[H][C@]1(N(CCC)CCC)CCc2cccc(O)c2C1 | C16H25NO
+C[C@H](CN(C)C)CN1c2ccccc2Sc2ccccc21 | C18H22N2S
+COc1cc(CC(=O)O)ccc1O | C9H10O4
+Cc1nc2ccccn2c(=O)c1CCN1CCC(C(=O)c2ccc(F)cc2)CC1 | C23H24FN3O2
+[H][C@]1(CNC(=O)c2cc(S(N)(=O)=O)ccc2OC)CCCN1CC | C15H23N3O4S
+[H][C@@](c1ccccc1)(c1ccc(Cl)cc1)N1CCN(C)CC1 | C18H21ClN2
+O=C(O)CCC(=O)c1ccc(-c2ccccc2)cc1 | C16H14O3
+[H][C@]1(OC(C)=O)C(=O)N(CCN(C)C)c2ccccc2S[C@@]1([H])c1ccc(OC)cc1 | C22H26N2O4S
+CCN(CC)CCNC(=O)c1ccc(N)cc1 | C13H21N3O
+Cc1cccc(Nc2cc(Cl)nc(SCC(=O)O)n2)c1C | C14H14ClN3O2S
+[H][C@@]1(c2ccc(O)cc2)CC(=O)c2c(O)cc(O)cc2O1 | C15H12O5
+[H][C@]1(CN2CCOCC2)CCc2[nH]c(C)c(CC)c2C1=O | C16H24N2O2
+C[C@H](C(=O)O)c1ccc(N2Cc3ccccc3C2=O)cc1 | C17H15NO3
+[H][C@]1(N(CCC)CCC)CCc2ccc(O)cc2C1 | C16H25NO
+Clc1ccc(Cn2c(CN3CCCC3)nc3ccccc32)cc1 | C19H20ClN3
+CCN(CC)CCNC(=O)c1cc(Br)c(N)cc1OC | C14H22BrN3O2
+[H][C@@]1(CCO[C@](C)(c2ccccc2)c2ccc(Cl)cc2)CCCN1C | C21H26ClNO
+c1ccc(C2CC2)c(OCC2NCCN2)c1 | C13H18N2O
+[H][C@@]1(OC(=O)c2c[nH]c3ccccc23)C[C@]2([H])CC[C@]([H])(C1)N2C | C17H20N2O2
+CC(C)NC[C@@H](O)COc1ccc(CCOCC2CC2)cc1 | C18H29NO3
+[H]C(=O)Nc1cc([C@@H](O)CN[C@H](C)Cc2ccc(OC)cc2)ccc1O | C19H24N2O4
+[H]/C(Cc1c(O)c2c(c(C)c1OC)COC2=O)=C(/C)CCC(=O)O | C17H20O6
+[H][C@@]1(NCCC)CCc2c(OC)cccc2[C@@H]1C | C15H23NO
+[H]/C(C1=NCCCN1C)=C(/[H])c1sccc1C | C12H16N2S
+CC(C)NC[C@H](O)COc1cccc2ccccc12 | C16H21NO2
+[H][C@@]1([C@]2([H])c3cc4c(cc3CCN2C)OCO4)OC(=O)c2c1ccc1c2OCO1 | C20H17NO6
+[H]/C(CCN(C)C)=C1/c2ccccc2COc2ccccc21 | C19H21NO
+[H]/C(CN1CCCC1)=C(/c1ccc(C)cc1)c1ccccn1 | C19H22N2
+[H]/C(CN(C)C)=C(\c1ccc(Br)cc1)c1cccnc1 | C16H17BrN2

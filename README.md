@@ -153,36 +153,7 @@ If `dgl-cu111==0.6.1` installation fails:
 - Verify CUDA 11.1 is installed on your system
 - For CPU-only, use `dgl==0.6.1` instead
 
-#### Script Fails on macOS
 
-macOS users should use CPU-only versions:
-- Follow the CPU-only PyTorch installation above
-- Some CUDA packages are Linux-only
-
-#### Verify Installation
-
-After installation, verify everything works:
-
-```bash
-conda activate NMR_Structure_Elucidator
-
-python -c "
-import torch
-print(f'PyTorch: {torch.__version__}')
-print(f'CUDA available: {torch.cuda.is_available()}')
-
-import dgl
-print(f'DGL: {dgl.__version__}')
-
-import rdkit
-print(f'RDKit: {rdkit.__version__}')
-
-import pytorch_lightning as pl
-print(f'PyTorch Lightning: {pl.__version__}')
-
-print('✅ All packages imported successfully!')
-"
-```
 
 ### Directory Structure Setup
 
@@ -205,55 +176,6 @@ parent_directory/
 └── itos.json, stoi.json              # Vocabulary files
 ```
 
-## Agent Scripts Usage
-
-The framework includes several specialized scripts in `LLM_Structure_Elucidator/agents/scripts/`:
-
-### 1. MMST Analysis
-```bash
-# Activate MMST environment
-conda activate NMR_Structure_Elucidator
-
-# Run MMST script
-cd LLM_Structure_Elucidator/agents/scripts
-./mmst_local.sh --input_csv input.csv --run_dir output_dir
-```
-
-### 2. Mol2Mol Generation
-```bash
-# Uses NMR_Structure_Elucidator environment
-conda activate NMR_Structure_Elucidator
-
-# Run Mol2Mol script
-./mol2mol_local.sh --input_csv molecules.csv --output_dir results/
-```
-
-### 3. Chemformer Analysis
-```bash
-# Activate Chemformer environment
-conda activate chemformer
-
-# Run Chemformer forward prediction
-./chemformer_forward_local.sh --input_file targets.txt --output_file predictions.csv
-```
-
-### 4. Peak Matching
-```bash
-# Uses base environment
-conda activate LLM_312
-
-# Run peak matching analysis
-./peak_matching_local.sh
-```
-
-### 5. SGNN Analysis
-```bash
-# Uses NMR_Structure_Elucidator environment
-conda activate NMR_Structure_Elucidator
-
-# Run SGNN script
-./sgnn_local.sh
-```
 
 ## Configuration
 
@@ -362,7 +284,6 @@ ChemStructLLM_/
         └── ... (additional run folders)
 ```
 
-**Note**: These files are essential for reproducing the experimental results and running the complete workflow analysis. The `data_exp` folder contains experimental datasets that are specifically required by the data analysis and testing Jupyter notebooks.
 
 ## Usage
 
@@ -387,14 +308,6 @@ For analysis and visualization of workflow results, please refer to the Jupyter 
 
 The full dataset and code used in our experiments is available on Zenodo:
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15422441.svg)](https://zenodo.org/records/15422441)
-
-We recommend downloading the complete repository from Zenodo to ensure all dependencies and files are properly organized.
-
-This includes:
-- Experimental NMR data for 34 diverse organic molecules
-- Regioisomeric analogs for testing structure recovery
-- Simulated spectral data with controlled noise
-- All necessary code and model files
 
 ## Citation
 

@@ -350,28 +350,7 @@ The generated JSON file contains:
 
 ---
 
-### 7. Advanced Analysis with Jupyter Notebooks
-
-#### Post-Processing Analysis
-
-1. **Generated Data Files**
-   - JSON files contain complete analysis results
-   - Located in the `results/` directory
-   - Timestamped for easy identification
-
-2. **Jupyter Notebook Integration**
-   - Use provided analysis notebooks
-   - Load JSON results for detailed examination
-   - Create custom visualizations and reports
-
-3. **Available Notebooks**
-   - `structure_analysis.ipynb`: Detailed structure comparison
-   - `nmr_interpretation.ipynb`: Advanced NMR analysis
-   - `confidence_evaluation.ipynb`: Result validation
-
----
-
-### 8. Customizing the Workflow
+### 7. Customizing the Workflow
 
 #### Workflow Configuration Options
 
@@ -469,11 +448,11 @@ WorkflowType.TARGET_ONLY: [
 **Scripts Location**: `LLM_Structure_Elucidator/agents/scripts/`
 
 **Available Scripts:**
-- `chemformer_forward_sbatch.sh` / `chemformer_forward_local.sh`
-- `chemformer_retro_sbatch.sh` / `chemformer_retro_local.sh`
-- `mol2mol_sbatch.sh` / `mol2mol_local.sh`
-- `mmst_sbatch.sh` / `mmst_local.sh`
-- `sgnn_sbatch.sh` / `sgnn_local.sh`
+- `chemformer_forward_sbatch.sh`
+- `chemformer_retro_sbatch.sh`
+- `mol2mol_sbatch.sh`
+- `mmst_sbatch.sh`
+- `sgnn_sbatch.sh` 
 - `peak_matching_local.sh`
 
 **Required Modifications:**
@@ -684,27 +663,6 @@ This section provides a step-by-step example of how to use ChemStructLLM from st
 - Comprehensive analysis JSON file in `data/molecular_data/`
 - All workflow predictions and analysis results stored for future use
 
----
-
-## Troubleshooting
-
-### Common Issues
-
-1. **File Upload Problems**
-   - Check CSV format matches requirements
-   - Ensure SMILES strings are valid
-   - Verify file size is within limits
-
-2. **NMR Display Issues**
-   - Confirm experimental data was uploaded correctly
-   - Check that molecule selection is active
-   - Verify NMR data format in CSV
-
-3. **AI Response Issues**
-   - Try different AI models for varied perspectives
-   - Rephrase questions if responses are unclear
-   - Check internet connection for model access
-
 ### Getting Help
 
 - Check the console logs for detailed error messages
@@ -716,8 +674,6 @@ This section provides a step-by-step example of how to use ChemStructLLM from st
 ## Conclusion
 
 ChemStructLLM provides a comprehensive platform for AI-assisted structure elucidation. By combining experimental NMR data with advanced AI reasoning, it offers powerful tools for molecular analysis and structure determination.
-
-For technical support or advanced customization, refer to the developer documentation or contact the development team.
 
 ---
 
