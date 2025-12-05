@@ -1,7 +1,7 @@
 # ChemStructLLM: Enhancing Molecular Structure Elucidation with Reasoning-Capable LLMs 
 
 ![ChemStructLLM Graphical Abstract](images/GA_2.png)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15422441.svg)](https://zenodo.org/records/15422441)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1782858.svg)](https://zenodo.org/records/1782858)
 
 This repository contains the implementation of our paper: "Enhancing Molecular Structure Elucidation with Reasoning-Capable LLMs" by Martin Priessner, Richard J. Lewis, Magnus J. Johansson, Jonathan M. Goodman, Jon Paul Janet, and Anna Tomberg.
 
@@ -222,7 +222,7 @@ The system supports multiple AI models for chat and analysis. Configure API keys
 ## Data and Model Setup from Zenodo
 
 The complete dataset and pre-trained models are available on Zenodo:
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15422441.svg)](https://zenodo.org/records/15422441)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1782858.svg)](https://zenodo.org/records/1782858)
 
 ### Download Required Files
 
@@ -307,7 +307,7 @@ For analysis and visualization of workflow results, please refer to the Jupyter 
 ## Datasets and Code
 
 The full dataset and code used in our experiments is available on Zenodo:
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15422441.svg)](https://zenodo.org/records/15422441)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1782858.svg)](https://zenodo.org/records/1782858)
 
 ## Citation
 
